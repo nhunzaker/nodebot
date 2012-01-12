@@ -1,0 +1,29 @@
+{
+    "name": "nodebot",
+    "description": "An artificial intelligence written for NodeJS",
+    "version": "0.0.34",
+
+    "homepage": "",
+
+    "engines": {
+        "node": "0.6.4"
+    },
+
+    "dependencies": {
+        "underscore.string": "*",
+        "natural": "*",
+        "underscore": "*",
+        "growl"  : "*",
+        "colors" : "*",
+        "request" : "*",
+        "jquery" : "*",
+
+        "jshint" : "*",
+        "csslint" : "*"
+    },
+
+    "author": "Nate Hunzaker",
+
+    "main": "./nodebot.js",
+    "bin" : { "nodebot": "./bin/nodebot" }
+}

@@ -18,7 +18,7 @@ Nodebot: Oh snap! I found 1 error in nodebot.js:
 48:12 - Don't make functions within a loop.
 
 Nodebot: What can I help you with?
- Response: is nodebot.js valid?
+ Response:
  
 ```
 

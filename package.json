@@ -1,25 +1,25 @@
 {
     "name": "nodebot",
     "description": "An artificial intelligence written for NodeJS",
-    "version": "0.0.34",
+    "version": "0.1.0",
 
     "homepage": "",
 
     "engines": {
-        "node": "0.6.4"
+        "node": ">=0.6.4"
     },
 
     "dependencies": {
-        "underscore.string": "*",
-        "natural": "*",
-        "underscore": "*",
-        "growl"  : "*",
-        "colors" : "*",
-        "request" : "*",
-        "jquery" : "*",
+        "underscore.string" : "*",
+        "natural"           : "*",
+        "underscore"        : "*",
+        "growl"             : "*",
+        "colors"            : "*",
+        "request"           : "*",
+        "jquery"            : "*",
 
-        "jshint" : "*",
-        "csslint" : "*"
+        "jshint"            : "*",
+        "csslint"           : "*"
     },
 
     "author": "Nate Hunzaker",

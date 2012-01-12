@@ -8,7 +8,7 @@ npm install nodebot -g
 
 ### Validate Javascript, CSS, and HTML (websites work too)
 ```
-$ nodebot is nodebot.js valid?
+$ nodebot
 
 Nodebot: What can I help you with?
  Response: is nodebot.js valid?
@@ -24,6 +24,8 @@ Nodebot: What can I help you with?
 
 ### General Information
 ```
+$ nodebot
+
 Nodebot: What can I help you with?
  Response: what is the current directory
 

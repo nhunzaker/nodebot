@@ -6,8 +6,6 @@ var natural = require('natural')
 ,   command = process.argv.slice(2).join(" ").trim()
 ,   home    = process.cwd();
 
-console.log(command);
-
 // -------------------------------------------------- //
 
 var NodeBot = function () {
@@ -21,60 +19,7 @@ var NodeBot = function () {
   };
   
   // long term memory
-  this.lexicon = {
-
-    nodebot: {
-      definition: "a robot, it lives to serve.",
-      name: "Nodebot",
-      'favorite color': "green".green.bold,
-      birthday: Date.now()
-    },
-
-    user: {
-      name: "Master",
-      definition: "my master.",
-
-      'ip address': function() {
-
-        var os        = require('os')
-        ,   ifaces    = os.networkInterfaces()
-        ,   addresses = ""
-        ;
-
-        for (var dev in ifaces) {
-
-          ifaces[dev].forEach(function(details){
-            if (details.family === 'IPv4') {
-              addresses += "\n" + ((details.internal) ? "   local - " : "external - ") + details.address;
-            }
-          });
-        }
-
-        return "\n" + addresses;
-
-      },
-
-      'ip addresses' : function() {
-        return self.lexicon.user['ip address']();
-      }
-    },
-
-    // Files
-    // ---------- //
-
-    "current directory" : {
-      definition: function() {
-        return process.cwd();
-      }
-    },
-    
-    "the current directory" : {
-      definition: function() {
-        return process.cwd();
-      }
-    }
-    
-  };
+  this.lexicon = require("./brain/lexicon");
 
   // All actions the nodebot can take
   this.actions = require("./actions");

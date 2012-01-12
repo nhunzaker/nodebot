@@ -6,6 +6,8 @@ var natural = require('natural')
 ,   command = process.argv.slice(2).join(" ").trim()
 ,   home    = process.cwd();
 
+console.log(command);
+
 // -------------------------------------------------- //
 
 var NodeBot = function () {

@@ -6,40 +6,25 @@ var natural       = require('natural')
 ,   parser        = {}
 ,   tokenizer     = new natural.TreebankWordTokenizer()
 ,   _             = require("underscore")
+
 ,   nounInflector = new natural.NounInflector()
 ,   verbInflector = new natural.NounInflector()
+
+,   english       = require("./english")()
+,   keyverb_list  = english.keyverbs
+,   pronoun_list  = english.pronouns
+,   keyword_list  = english.keywords
+,   actions       = english.actions
 ;
 
 natural.BayesClassifier.load(__dirname + '/classifier.json', null, function(err, classifier) {
     parser = classifier;
+    
+    if (typeof Nodebot !== 'undefined') {
+        Nodebot.emit("ready");
+    }
+
 });
-
-// Basic English Classifications
-var pronoun_list  = [ 
-    "I", "i", "me", "my", "mine",
-    "you", "your", 
-    "he", "she","him","her", "his", "hers", 
-    "we", "us", "our", 
-    "it", "its", "they", "their", "them",
-    "\'s", "\'"
-];
-
-var keyverb_list = [
-    "to", "be", "been", "being", 
-    "is", "are", "am", "was", "were", "have"
-];
-
-var actions = [ 
-    "who", "what", "repeat", "validate"
-];
-
-var keyword_list = natural.stopwords.filter(function(i) {
-    return i.length > 1 || i === "a" || i === "i";
-});
-
-keyword_list.push("?");
-keyword_list.push("when");
-
 
 // -------------------------------------------------- //
 
@@ -81,39 +66,55 @@ var language = {
         
         description = tokens.join(" ").replace(subject, "").replace(tokens[ownership], "").replace(tokens[keyverb], "").trim();
 
-        // Deal with special instances of ownership
+
+        // -------------------------------------------------- //
+        // The Subject
+        // -------------------------------------------------- //
+
+        subject = (subject === "") ? "definition" : subject;
+
+
+        // -------------------------------------------------- //
+        // The Ownership
+        // -------------------------------------------------- //
+
         switch(tokens[ownership]) {
 
         case "me": case "my": case "i": case "I":
             ownership = "user";
             break;
+
         case "your": case "you":
             ownership = "nodebot";
             break;
-        case "it": case "its": case "their": case "he": case "she": case "his": case "hers":
+
+        case "it": case "its": case "they": case "their": case "he": case "she": case "his": case "hers":
             ownership = this.memory.context;
-        case "":
-            ownership = subject;
             break;
+
+        case "":
+            
+            if (keyverb === -1) {
+                ownership = tokens[1];
+                subject   = tokens[1];
+            } else {
+                ownership = subject;
+            }
+
+            break;
+
         case undefined:
             ownership = description;
             subject = "definition";
             break;
+
         default:
             ownership = tokens[ownership];
         }
         
-        // Bulletproof subject
-        subject = (subject === "") ? "definition" : subject;
-        // Bulletproof ownership
-        if (ownership === "" && keyverb === -1) {
-            ownership = tokens[1];
-            subject   = tokens[1];
-        } 
-        
         // Addresses "Is nodebot.js valid?"
         if (keyverb === 0 && isQuestion) {
-            subject = tokens.slice(1, -1).join(" ").trim();
+            subject = ownership;
         }
         
         if (description === ownership){
@@ -127,7 +128,7 @@ var language = {
         // Bulletproof keyverbs
         // Addresses "Validate file.js"
         if (keyverb === -1) {
-            subject = tokens.slice(action + 1).join(" ").trim();
+            ownership = subject = tokens.slice(action + 1).join(" ").trim();
         } 
 
         return {
@@ -199,6 +200,7 @@ var language = {
     },
 
     capitalize: function (string) {
+        if (typeof string !== 'string') return string;
         return string[0].toUpperCase() + string.split("").slice(1).join("");
     }
     

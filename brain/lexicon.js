@@ -4,55 +4,61 @@
 
 module.exports = {
 
-  nodebot: {
-    definition: "a robot, it lives to serve.",
-    name: "Nodebot",
-    'favorite color': "green".green.bold,
-    birthday: new Date().toString()
-  },
-
-  user: {
-    name: "Master",
-    definition: "my master.",
-
-    'ip address': function() {
-
-      var os        = require('os')
-      ,   ifaces    = os.networkInterfaces()
-      ,   addresses = ""
-      ;
-
-      for (var dev in ifaces) {
-
-        ifaces[dev].forEach(function(details){
-          if (details.family === 'IPv4') {
-            addresses += "\n" + ((details.internal) ? "   local - " : "external - ") + details.address;
-          }
-        });
-      }
-
-      return "\n" + addresses;
-
+    nodebot: {
+        definition: "a robot, it lives to serve.",
+        name: "Nodebot",
+        'favorite color': "green".green.bold,
+        birthday: new Date().toString()
     },
 
-    'ip addresses' : function() {
-      return self.lexicon.user['ip address']();
-    }
-  },
+    user: {
+        name: "Master",
+        definition: "my master.",
 
-  // Files
-  // ---------- //
+        'ip address': function() {
 
-  "current directory" : {
-    definition: function() {
-      return process.cwd();
+            var os        = require('os')
+            ,   ifaces    = os.networkInterfaces()
+            ,   addresses = ""
+            ;
+
+            for (var dev in ifaces) {
+
+                ifaces[dev].forEach(function(details){
+                    if (details.family === 'IPv4') {
+                        addresses += "\n" + ((details.internal) ? "   local - " : "external - ") + details.address;
+                    }
+                });
+            }
+
+            return "\n" + addresses;
+
+        },
+
+        'ip addresses' : function() {
+            return self.lexicon.user['ip address']();
+        }
+        
+    },
+
+    'up' : {
+        definition: "What's up? I'm not really sure, it's so hard to explain to 4 dimensional beings"
+    },
+
+
+    // Files
+    // ---------- //
+
+    "current directory" : {
+        definition: function() {
+            return process.cwd();
+        }
+    },
+    
+    "the current directory" : {
+        definition: function() {
+            return process.cwd();
+        }
     }
-  },
-  
-  "the current directory" : {
-    definition: function() {
-      return process.cwd();
-    }
-  }
-  
+    
 };

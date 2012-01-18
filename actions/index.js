@@ -1,9 +1,9 @@
 
 var actions  = {}
 ,   language = require('../brain/language')
-,   lang = language
+,   lang     = language
+,   fs       = require("fs");
 ;
-
 
 // Scanners
 var urlEx  = /(http(\S|)\:\/\/\S+|[^\/\s]+\.[^\/\s]+\.\S+|[^\/\s]+\:\d+(\S+|))/i  // woo, that took some doing...
@@ -25,7 +25,6 @@ actions.who = function(a) {
     ,   owner = a.ownership
     ,   key = a.subject
     ;
-
 
     // Special instances
     // -------------------------------------------------- //
@@ -123,6 +122,9 @@ actions.what = function(a) {
     // Handle methods
     if (typeof statement === "function") {
         statement = statement().toString();
+    } else if (fileEx.test(owner)) {
+        nodebot.say(owner.cyan + " is a file.");
+        return nodebot.request();
     }
 
     // Do we have a definition for ths subject?
@@ -161,83 +163,63 @@ actions.what = function(a) {
 
 actions.validate = function(a, skipRequest) {
     
-    var validator = {}
-    ,   subject   = a.subject.split(" ").join("") // remove inevitable whitespace
-    ,   file      = ""
-    ,   stat      = ""
-    ,   fs        = require('fs')
-    ,   nodebot   = this
-    ;
+    var target  = a.subject.split(" ").join("")
+    ,   nodebot = this;
+    
+    if (!target.match(urlEx)) {
+        
+        try { 
+            fs.statSync(target); 
+        } catch (err) {
+            nodebot.say("I had trouble finding " + target + ". Does it exist?".cyan);
 
-    // Does the file exist?
-    try {
-        // is it a website?
-        if (subject.match(urlEx)) {
-            file = subject.match(urlEx)[0].replace("?", "").toString();
-        } else {
-            // If it isn't a website, try to find it locally
-            file = subject.match(fileEx)[0].toString().replace("?", "");
-            stat = fs.statSync(file);
+            return nodebot.request();
         }
+    }
 
-    } catch (err) {
-        this.say("I had trouble finding " + subject + ". Does it exist?".bold.cyan);
-        return this.request();
+    function dispatch(fileType) {
+        require("../validator/" + fileType).validate.apply(nodebot, [target,  function cb() {
+            return (!skipRequest) ? false : nodebot.request();
+        }]);
     }
 
     // VALIDATORS
     // -------------------------------------------------- //
-    if ( file.match(jsEx) ) {
-        require("./validator/javascript").validate.apply(this, [file]);
-        if (!skipRequest) {
-            return this.request();
-        }
-    } else if ( file.match(cssEx) ) {
-        require("./validator/css").validate.apply(this, [file]);
-        if (!skipRequest) {
-            return this.request();
-        }
-    } else if ( file.match(urlEx)){
-        require("./validator/website").validate.apply(this, [file, function() {
-            if (!skipRequest) {
-                return nodebot.request();
-            }
-        }]);
-    } else if (file.match(htmlEx)) {
-        require("./validator/html").validate.apply(this, [file, function() {
-            if (!skipRequest) {
-                return nodebot.request();
-            }
-        }]);
-
-    } else {
-        this.say("I'm sorry, I don't recognize that file format yet");
-    }
     
+    // Javascript
+    if (target.match(jsEx)) dispatch("javascript");
+
+    // CSS
+    else if (target.match(cssEx)) dispatch("css");
+
+    // Websites
+    else if (target.match(urlEx)) dispatch("website");
+
+    // HTML
+    else if (target.match(htmlEx)) dispatch("html");
+
+    // Elsecase
+    else {
+        this.say("I'm sorry, I don't recognize that file format yet");
+        if (!skipRequest) return nodebot.request();
+    }
+
 };
 
 
-actions.watch = function(string) {
+actions.watch = function(a) {
 
-    // Bullet proof
-    if (string === undefined) {
-        this.say("I'd love to watch a file for you, but you have to " + "tell me which one!".red.bold);
-        return this.request();
-    } else if (string.match(urlEx)) {
+    var file    = a.subject
+    ,   nodebot = this
+    ,   watch   = false;
+
+    // Bullet proof websites
+    if (file.match(urlEx)) {
         this.say("This is a website. I'm going to pass it through the web validator");
         return actions.validate.apply(this, [string]);
-    }
+    }  
 
-    var file      = ""
-    ,   fs        = require("fs")
-    ,   nodebot   = this
-    ,   validator = ""
-    ,   watch     = false
-    ,   stat      = null
-    ;
-    
     try {
-        file = string.match(fileEx)[0].toString().replace("?", "");
         stat = fs.statSync(file);
     } catch (err) {
         nodebot.say("I couldn't find that location, does it exist?");
@@ -249,16 +231,16 @@ actions.watch = function(string) {
         return nodebot.request();
     }
 
-
     // Watch files
     // -------------------------------------------------- //
 
     fs.watchFile(file, { persistent: true, interval: 1000 }, function (curr, prev) {
+
         var content = fs.readFileSync(file, "utf-8");
         
         if (content !== nodebot.memory.watched_content) {
             nodebot.say("Looks like something has changed on " + file.blue.bold);
-            actions.validate.apply(nodebot, [file, true]);
+            actions.validate.apply(nodebot, [a, true]);
 
             // Update with new content
             nodebot.memory.watched_content = content;
@@ -266,7 +248,8 @@ actions.watch = function(string) {
     });
 
     nodebot.say("I am now watching " + file.blue.bold);
-    actions.validate.apply(nodebot, [file, true]);
+
+    return actions.validate.apply(nodebot, [a, true]);
 
 };
 
@@ -281,9 +264,8 @@ actions.repeat = function() {
     } else {
         action = this.memory.tasks.slice(-1).toString();
     }
-
-    this.say("Repeating " +  ("\"" + action.trim() + "\"").green.bold );
     
+    // Run the old action
     return this.analyze(action);
 
 };

@@ -1,15 +1,18 @@
-// NodeBot Javascript Validator
+// The Nodebot Javascript Validator
+//
+// Validates Javascript using jshint
+// -------------------------------------------------- //
 
 var fs   = require("fs")
-,   lang = require("../brain/language");
+,   generate_report  = require(__dirname + "/reporter");
 
-module.exports.validate = function(file) {
+module.exports.validate = function(file, callback) {
     
     var data      = fs.readFileSync(file, 'utf-8')
     ,   options   = require("./jshint_config")
     ,   validator = require("jshint").JSHINT
     ,   nodebot   = this
-    ,   errors = [];
+    ,   report    = [];
 
     // Validate it
     validator(data, options);
@@ -18,18 +21,19 @@ module.exports.validate = function(file) {
 
     if (errors.length > 0) {
         
-        var report = "Oh snap!" + " I found " + lang.pluralize(errors, "error").red.bold + " in " + file.bold + ": "
-            +        "\n----------------------------------";
-
         // Report errors
         validator.errors.forEach(function(error){
-            report += "\n" + (error.line + ":" + error.character + " - " +  error.reason).red.bold;
+            if (error === null) return false;
+            error.type = "error";
+            report.push(error);
         });
         
-        nodebot.say(report);
-        nodebot.growl("Sorry. I found " + validator.errors.length + " errors in " + file + " (See terminal)", "error");
+        generate_report(report);
+
     } else {
         nodebot.say(file.green.bold + " is valid".green.bold);
     }
 
+    
+    callback();
 };

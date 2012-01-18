@@ -1,46 +1,44 @@
-// General requirements
+// Nodebot.js
+// 
+// Description: A helper robot that lives to serve
+// Author: Nate Hunzaker
+// -------------------------------------------------- //
+// Licence: MIT
+// -------------------------------------------------- //
 
 require('colors');
 
-var natural = require('natural')
-,   command = process.argv.slice(2).join(" ").trim()
-,   home    = process.cwd();
+Nodebot = new(require("events").EventEmitter);
+
+// short term memory
+Nodebot.memory  = {
+    tasks   : [],
+    context : "nodebot"
+};
+
+// long term memory
+Nodebot.lexicon = require("./brain/lexicon");
+
+// The linguistics module
+Nodebot.language = require("./brain/language");
+
+// All actions the nodebot can take
+Nodebot.actions = require("./actions");
+
+// Adds the decision making module
+Nodebot.analyze = require("./brain/analyze");
+
+// Adds common interactions, such as say, growl, ask and request
+require("./brain/interaction")(Nodebot);
 
 // -------------------------------------------------- //
 
-var NodeBot = function () {
+// Get the initial action
+var command = process.argv.slice(2).join(" ").trim();
 
-  var self = this;
+// Take the proper initial action
+Nodebot.on("ready", function() {
+    (command !== "") ? Nodebot.analyze(command) : Nodebot.request();
+});
 
-  // short term memory
-  this.memory  = {
-    tasks         : [],
-    current_topic : ""
-  };
-  
-  // long term memory
-  this.lexicon = require("./brain/lexicon");
 
-  // All actions the nodebot can take
-  this.actions = require("./actions");
-  
-  // The linguistics module
-  this.language = require("./brain/language");
-  
-  // Adds the decision making module
-  require("./brain/analyze")(this);
-  
-  // Adds common interactions, such as say, growl, ask and request
-  require("./brain/interaction")(this);
-
-};
-
-// Initalize
-var nodebot = new NodeBot();
-
-// Initial action
-if (command !== "") {
-  nodebot.analyze(command);
-} else {
-  nodebot.request();
-}

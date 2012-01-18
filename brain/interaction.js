@@ -3,9 +3,9 @@
 
 var growl = require('growl');
 
-function add_interaction_module(context) {
+module.exports = function add_interaction_module(context) {
 
-    var nodebot = context;
+    var nodebot = Nodebot;
 
     // Handle Prompts
     // -------------------------------------------------- //
@@ -30,20 +30,13 @@ function add_interaction_module(context) {
         });
     };
 
-    nodebot.say = function(message) {
-        console.log("\n" + nodebot.lexicon.nodebot.name.magenta.bold + ": " + message);
+    nodebot.say = function() {
+        arguments[0] = "\n" + nodebot.lexicon.nodebot.name.magenta.bold + ": " + arguments[0];
+        console.log.apply(nodebot, arguments);
     };
 
     nodebot.growl = function (message, type) {
-
-        var faces = {
-            base  : "../images/robot.png",
-            error : "../images/robot_error.png"
-        };
-
-        growl(message, { title: 'NodeBot:', image: faces[type] || faces.base });
+        growl(message, { title: 'NodeBot:' });
     };
 
-}
-
-module.exports = add_interaction_module;
+};

@@ -8,7 +8,9 @@ var lang    = require("../brain/language")
 ;
 
 module.exports = function what (a) {
-    
+
+    if (a.owner === a.subject) a.subject = "definition";
+
     var nodebot   = this
     ,   owner     = a.owner
     ,   subject   = a.subject || "definition"
@@ -55,8 +57,9 @@ module.exports = function what (a) {
             return nodebot.request();
         }
         
-        nodebot.lexico[nowner] = nodebot.lexicon[owner] || {};
+        nodebot.lexicon[owner] = nodebot.lexicon[owner] || {};
         nodebot.lexicon[owner][subject] = text;
+
         nodebot.say("Great, now I know!");
         
         return nodebot.request();

@@ -6,11 +6,11 @@ var actions  = {}
 ;
 
 // Scanners
-var urlEx  = /(http(\S|)\:\/\/\S+|[^\/\s]+\.[^\/\s]+\.\S+|[^\/\s]+\:\d+(\S+|))/i  // woo, that took some doing...
-,   fileEx = /\S+\.\S+/i
-,   jsEx   = /\.js/i
-,   cssEx  = /\.css/i
-,   htmlEx = /\.html/i
+var urlEx  = Nodebot.lexicon.url['regular expression']
+,   fileEx = Nodebot.lexicon.file['regular expression']
+,   jsEx   = Nodebot.lexicon.javascript['regular expression']
+,   cssEx  = Nodebot.lexicon.css['regular expression']
+,   htmlEx = Nodebot.lexicon.html['regular expression']
 ;
 
 
@@ -22,7 +22,7 @@ module.exports = actions;
 actions.who = function(a) {
 
     var nodebot = this
-    ,   owner = a.ownership
+    ,   owner = a.owner
     ,   key = a.subject
     ;
 
@@ -33,9 +33,9 @@ actions.who = function(a) {
     case "nodebot":
         
         if (this.lexicon.nodebot[key]) {
-            this.say("I am " + this.lexicon.nodebot.name);
+            this.say("My " + key + " is " + this.lexicon.nodebot[key]);
         } else {
-            this.say("Hmm, I'm not sure. I just know that I am " + this.lexicon.nodebot.name);
+            this.say(this.lexicon.nodebot.name + " is " + this.lexicon.nodebot.definition);
         }
 
         return this.request();
@@ -108,60 +108,13 @@ actions.relabel = function(a) {
 };
 
 
-// What
-// -------------------------------------------------- //
-
-actions.what = function(a) {
-    
-    var nodebot   = this
-    ,   statement = (this.lexicon[a.ownership]) ? this.lexicon[a.ownership][a.subject] : undefined
-    ,   owner     = a.ownership
-    ,   subject   = a.subject
-    ;
-
-    // Handle methods
-    if (typeof statement === "function") {
-        statement = statement().toString();
-    } else if (fileEx.test(owner)) {
-        nodebot.say(owner.cyan + " is a file.");
-        return nodebot.request();
-    }
-
-    // Do we have a definition for ths subject?
-    // -------------------------------------------------- //
-    if (statement !== undefined) {
-
-        if (a.subject === "definition") {
-            nodebot.say(lang.capitalize(owner) + " is " + statement.green.bold);
-        } else {
-            nodebot.say(lang.possessify(lang.capitalize(owner)) + " " + subject + " " + a.keyverb + " " + statement.green.bold);
-        }
-        
-        return nodebot.request();
-    }
-
-    // no : learn it
-
-    nodebot.ask("Hmm... I can't remember. Care to tell me what " + lang.possessify(owner) + " " + subject + " is?", function(text) {
-
-        if (text[0].toLowerCase() === "no") {
-            nodebot.say("Okay, I'll forget you ever asked.");
-            return nodebot.request();
-        }
-        
-        nodebot.lexicon[owner] = nodebot.lexicon[owner] || {};
-        nodebot.lexicon[owner][subject] = text;
-        nodebot.say("Great, now I know!");
-        
-        return nodebot.request();
-    });
-};
+actions.what = require(__dirname + "/what");
 
 
 // File Operations
 // -------------------------------------------------- //
 
-actions.validate = function(a, skipRequest) {
+actions.validate = actions.wrong = function(a, skipRequest) {
     
     var target  = a.subject.split(" ").join("")
     ,   nodebot = this;
@@ -207,7 +160,7 @@ actions.validate = function(a, skipRequest) {
 };
 
 
-actions.watch = function(a) {
+actions.watch = actions.look = function(a) {
 
     var file    = a.subject
     ,   nodebot = this
@@ -222,7 +175,7 @@ actions.watch = function(a) {
     try {
         stat = fs.statSync(file);
     } catch (err) {
-        nodebot.say("I couldn't find that location, does it exist?");
+        nodebot.say("I couldn't find that file, does it exist?");
         return nodebot.request();
     }
     
@@ -253,6 +206,7 @@ actions.watch = function(a) {
 
 };
 
+
 // Repeat actions
 actions.repeat = function() {
     
@@ -267,5 +221,17 @@ actions.repeat = function() {
     
     // Run the old action
     return this.analyze(action);
+
+};
+
+
+// How
+// -------------------------------------------------- //
+
+actions.how = function(a) {
+    
+    this.say("I don't know how to %s", a.subject);
+    
+    return this.request();
 
 };

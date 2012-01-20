@@ -37,8 +37,6 @@ require("./brain/interaction")(Nodebot);
 var command = process.argv.slice(2).join(" ").trim();
 
 // Take the proper initial action
-Nodebot.on("ready", function() {
-    (command !== "") ? Nodebot.analyze(command) : Nodebot.request();
-});
+(command !== "") ? Nodebot.analyze(command) : Nodebot.request();
 
 

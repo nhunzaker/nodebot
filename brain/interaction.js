@@ -20,7 +20,6 @@ module.exports = function add_interaction_module(context) {
         stdin.once('data', function(data) {
             callback(data.toString());
         });
-        
     };
 
     nodebot.request = function() {
@@ -33,10 +32,14 @@ module.exports = function add_interaction_module(context) {
     nodebot.say = function() {
         arguments[0] = "\n" + nodebot.lexicon.nodebot.name.magenta.bold + ": " + arguments[0];
         console.log.apply(nodebot, arguments);
+
+        return this;
     };
 
     nodebot.growl = function (message, type) {
         growl(message, { title: 'NodeBot:' });
+
+        return this;
     };
 
 };

@@ -115,6 +115,96 @@ vows.describe('Decipher speech').addBatch({
         
     },
 
+    'When asked, "What is my ip address?"': {
+        
+        topic: tagger.classify("What is my ip address?"),
+
+        'it should correctly identify the action': function (topic) {
+            assert.equal(topic.action, "what");
+        },
+
+        'it should correctly determine ownership': function (topic) {
+            assert.equal(topic.owner, "user");
+        },
+
+        'it should correctly determine the subject': function (topic) {
+            assert.equal(topic.subject, "ip address");
+        }
+        
+    },
+
+    'When asked, "Do you know what my ip address is?"': {
+        
+        topic: tagger.classify("Do you know what my ip address is?"),
+
+        'it should correctly identify the action': function (topic) {
+            assert.equal(topic.action, "what");
+        },
+
+        'it should correctly determine ownership': function (topic) {
+            assert.equal(topic.owner, "user");
+        },
+
+        'it should correctly determine the subject': function (topic) {
+            assert.equal(topic.subject, "ip address");
+        }
+        
+    },
+
+    'When asked, "What is an ip address?"': {
+        
+        topic: tagger.classify("What is an ip address?"),
+
+        'it should correctly identify the action': function (topic) {
+            assert.equal(topic.action, "what");
+        },
+
+        'it should correctly determine ownership': function (topic) {
+            assert.equal(topic.owner, "ip address");
+        },
+
+        'it should correctly determine the subject': function (topic) {
+            assert.equal(topic.subject, "ip address");
+        }
+        
+    },
+
+'When asked, "What is an ip address?"': {
+        
+        topic: tagger.classify("What is an ip address?"),
+
+        'it should correctly identify the action': function (topic) {
+            assert.equal(topic.action, "what");
+        },
+
+        'it should correctly determine ownership': function (topic) {
+            assert.equal(topic.owner, "ip address");
+        },
+
+        'it should correctly determine the subject': function (topic) {
+            assert.equal(topic.subject, "ip address");
+        }
+        
+    },
+
+
+    'When asked, "What is funnel cake?"': {
+        
+        topic: tagger.classify("What is funnel cake?", true),
+
+        'it should correctly identify the action': function (topic) {
+            assert.equal(topic.action, "what");
+        },
+
+        'it should correctly determine ownership': function (topic) {
+            assert.equal(topic.owner, "funnel cake");
+        },
+
+        'it should correctly determine the subject': function (topic) {
+            assert.equal(topic.subject, "funnel cake");
+        }
+        
+    },
 
     'When asked, "Validate application.js"': {
 
@@ -238,7 +328,7 @@ vows.describe('Decipher speech').addBatch({
 
     'When asked, "Do you know what the current directory is?"': {
 
-        topic: tagger.classify("Do you know what the current directory is?", true),
+        topic: tagger.classify("Do you know what the current directory is?"),
         
         'the action should be "what"': function (topic) {
             assert.equal(topic.action, "what");
@@ -256,7 +346,7 @@ vows.describe('Decipher speech').addBatch({
 
     'When asked, "What is it?"': {
 
-        topic: tagger.classify("What is it?", true),
+        topic: tagger.classify("What is it?"),
         
         'the action should be "what"': function (topic) {
             assert.equal(topic.action, "what");

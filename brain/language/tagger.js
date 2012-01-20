@@ -120,7 +120,7 @@ var classify = module.exports.classify = function(speech, debug) {
         console.log(tagged);
     }
     
-
+    
     // Classify!
     // -------------------------------------------------- //
 
@@ -155,6 +155,10 @@ var classify = module.exports.classify = function(speech, debug) {
     } else {
         action = adjectives[0];
     }
+    
+    // Lowercase the action if we find one
+    action = (action) ? action.toLowerCase() : action;
+
 
 
     // OWNERSHIP
@@ -166,17 +170,18 @@ var classify = module.exports.classify = function(speech, debug) {
     var posession = tagged.filter(function(i) { return i[1] === "PRP$" || i[1] === "PRP"; });
 
     // If there is posession and we have an action, then
-    // the owner is the posessive word
+    // the owner is the last posessive word
     if (posession.length > 0 && action) {
 
-        owner = posession[0][0];
-        
-        // More bulletproofing, if the owner word is further
-        // in the sentence than the action, then we need to igore
-        // all of the verbs/posessives before the action
+        owner = posession.slice(-1)[0][0];
+
+        // More bulletproofing, if the owner word is not self-
+        // posessive and is found further  in the sentence than 
+        // the action, then we need to igore all of the 
+        // verbs/posessives before the action
         //
         // ex: "Do you know what the current directory is?"
-        if (words.indexOf(owner) < words.indexOf(action)) {
+        if (getType(owner) !== "PRP$" && words.indexOf(owner) < words.indexOf(action)) {
             owner = getBetween(words, ["DT"], "NN").join(" ");
         }
 
@@ -235,13 +240,11 @@ var classify = module.exports.classify = function(speech, debug) {
     // prepositions, determinates, and posessive words and
     // prepositions, nouns, and puncuation
     else if (owner && preps.length > 0) {
-        
-        debug && console.log("fire");
-        
+
         // To account for more than one preposition, we need to be able to filter between
         // either the inside or outside preposition
         if (preps.length === 1) {
-            subject = getBetween(words, ["IN", "DT", "PRP$"], ["IN", "NN", "."], "outside");
+            subject = getBetween(words, ["DT", "PRP$"], ["IN"], "outside");
         } else {
             subject = getBetween(words, ["IN", "DT", "PRP$"], ["IN", "NN", "."], "inside");
         }
@@ -264,14 +267,28 @@ var classify = module.exports.classify = function(speech, debug) {
         subject = subject.join(" ").trim();
 
     } 
-
-
-    // Okay, last chance. If there *is* ownership, and there are no prepositions
+ 
+    // If there *is* ownership, and there are no prepositions
     // then the subject is inside the owner/determinate/verb and the last noun
     // (*phew...*)
     else if (owner && preps.length === 0) {
-        subject = getBetween(words, ["DT", "VBP", "PRP$"], "NN", "inside").join(" ");
+
+        subject = getBetween(words, ["DT", "VBP", "PRP$"], "NN", "inside");
+
+        // Strip accidental catches of the actions
+        if (subject[0] && subject[0].toLowerCase() === action) {
+            subject = subject.slice(1);
+        }
+
+        // Strip accidental present tense verbs
+        if (subject[0] && getType(subject[0]) === "VBZ") {
+            subject = subject.slice(1);
+        }
+        
+        subject = subject.join(" ");
     }
+
+
     
     // Now that everything is properly classified,
     // let's filter the ownership
@@ -290,7 +307,7 @@ var classify = module.exports.classify = function(speech, debug) {
         
         // Tweak other non-specific possession cases to the last
         // recorded context
-    case "": case "it": case "its": 
+    case "it": case "its": 
     case "they": case "their": case "he": case "she": 
     case "his": case "hers":
         owner = Nodebot.memory.context;
@@ -302,7 +319,7 @@ var classify = module.exports.classify = function(speech, debug) {
     // -------------------------------------------------- //
 
     var ret = {
-        action  : (action) ? action.toLowerCase() : undefined,
+        action  : action,
         owner   : owner,
         subject : subject,
         tokens  : words

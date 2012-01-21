@@ -5,6 +5,7 @@
 
 var lang    = require("../brain/language")
 ,   fileEx  = Nodebot.lexicon.file["regular expression"]
+,   request = require("request")
 ;
 
 module.exports = function what (a) {
@@ -20,7 +21,7 @@ module.exports = function what (a) {
     ;
     
     // Just some more bullet proofing for the subject
-    if (owner === subject) subject === "definition"
+    if (owner === subject) subject === "definition";
 
     // If the term is a function, call it to determin the value
     if (typeof term === "function") term = term().toString();
@@ -33,6 +34,7 @@ module.exports = function what (a) {
 
     // Do we have a definition for ths subject?
     // -------------------------------------------------- //
+
     if (term) {
         
         switch (subject) {
@@ -48,22 +50,70 @@ module.exports = function what (a) {
 
     }
 
-    // no : learn it
 
-    nodebot.ask("Hmm... I can't remember. Care to tell me what " + lang.possessify(owner) + " " + subject + " is?", function(text) {
+    // No, search WolframAlpha
+    // -------------------------------------------------- //
 
-        if (text[0].toLowerCase() === "no") {
-            nodebot.say("Okay, I'll forget you ever asked.");
-            return nodebot.request();
+    var qs = require('querystring');
+
+    var sax = require("../sax-js"),
+    strict = true, // set to false for html-mode
+    parser = sax.parser(strict);
+
+    var request = require("request");
+
+    var app_id = "GVH84U-9YQ66P7PU3"
+    ,   repl   = require('repl');
+    
+    nodebot.say("Hmm, I don't know off the top of my head. Give me a minute...");
+
+    var result = [];
+    
+    var data = qs.stringify({ input: a.tokens.join(" ") });
+
+    request.get("http://api.wolframalpha.com/v2/query?" + data + "&appid=" + app_id, function(err, data) {
+
+        nodebot.say("Here's what %s has to say:", "WolframAlpha".red.bold);
+
+        parser.onopentag = function(tag){
+            console.log(tag);
+            parser.onattribute = function(att) {
+//                console.log(att);
+            };
+
         }
-        
-        nodebot.lexicon[owner] = nodebot.lexicon[owner] || {};
-        nodebot.lexicon[owner][subject] = text;
 
-        nodebot.say("Great, now I know!");
+        parser.ontext = function(t) {
+            var proc = t.trim();
+            if (proc !== "" && proc !== "\n") result.push(proc)
+        };
+
+        parser.onend = function () {
+            info = result;
+            repl.start("> ");
+        };
         
-        return nodebot.request();
+        parser.write(data.body).close();
+        
+
     });
 
+    
+    /*
+      nodebot.ask("Hmm... I can't remember. Care to tell me what " + lang.possessify(owner) + " " + subject + " is?", function(text) {
+
+      if (text[0].toLowerCase() === "no") {
+      nodebot.say("Okay, I'll forget you ever asked.");
+      return nodebot.request();
+      }
+      
+      nodebot.lexicon[owner] = nodebot.lexicon[owner] || {};
+      nodebot.lexicon[owner][subject] = text;
+
+      nodebot.say("Great, now I know!");
+      
+      return nodebot.request();
+      });
+    */
     return;
 };

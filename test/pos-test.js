@@ -190,7 +190,7 @@ vows.describe('Decipher speech').addBatch({
 
     'When asked, "What is funnel cake?"': {
         
-        topic: tagger.classify("What is funnel cake?", true),
+        topic: tagger.classify("What is funnel cake?"),
 
         'it should correctly identify the action': function (topic) {
             assert.equal(topic.action, "what");

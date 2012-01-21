@@ -114,12 +114,12 @@ var classify = module.exports.classify = function(speech, debug) {
     var text   = speech || process.argv.slice(2).join(" ")
     ,   words  = lexer.lex(text)
     ,   tagged = tagger.tag(words)
-    ,   action = subject = owner = false;
+    ,   action, subject, owner;
+
 
     if (debug) {
         console.log(tagged);
     }
-    
     
     // Classify!
     // -------------------------------------------------- //
@@ -133,8 +133,8 @@ var classify = module.exports.classify = function(speech, debug) {
     ,   websites    = getTypes(tagged, "URL")
     ,   preps       = getTypes(tagged, "IN")
     ,   determiners = getTypes(tagged, "DT")
+    ,   to          = getTypes(tagged, "TO")
     ;
-
 
 
     // ACTION
@@ -142,20 +142,22 @@ var classify = module.exports.classify = function(speech, debug) {
     // command"
     // -------------------------------------------------- //
 
-    // Are there actions present?
+    // Are there known action words present?
     if (actions.length > 0) {
         action = actions[0];
+    } 
 
-    } else if (getTypes(tagged, "VB", true).length > 0) {
+    // Are there base verbs present? Then it's probably
+    // the first verb
+    else if (getTypes(tagged, "VB", true).length > 0) {
+        action = getTypes(tagged, "VB", true)[0];
+    } 
 
-        // Are there base verbs present?
-        action = getTypes(tagged, "VB", true).slice(-1)[0];
-
-        // Are there at least any adjectives that might work?
-    } else {
+    // Are there at least any adjectives that might work?
+    else if (adjectives.length > 0) {
         action = adjectives[0];
     }
-    
+
     // Lowercase the action if we find one
     action = (action) ? action.toLowerCase() : action;
 
@@ -166,14 +168,12 @@ var classify = module.exports.classify = function(speech, debug) {
     // action?"
     // -------------------------------------------------- //
     
-
-    var posession = tagged.filter(function(i) { return i[1] === "PRP$" || i[1] === "PRP"; });
-
-    // If there is posession and we have an action, then
+    // If there is posessive pronouns and we have an action, then
     // the owner is the last posessive word
-    if (posession.length > 0 && action) {
 
-        owner = posession.slice(-1)[0][0];
+    if (pronouns.length > 0 && action) {
+
+        owner = pronouns.slice(-1)[0];
 
         // More bulletproofing, if the owner word is not self-
         // posessive and is found further  in the sentence than 
@@ -190,7 +190,7 @@ var classify = module.exports.classify = function(speech, debug) {
     // No ? Let's try between a preposition and 
     // determiners/nouns
     else if (determiners.length > 0 && preps.length > 0) {
-        
+
         owner = getBetween(words, ["IN"], ["DT", "NN", "."]);
 
         // Strip accidental determinates
@@ -202,12 +202,17 @@ var classify = module.exports.classify = function(speech, debug) {
         owner = owner.join(" ").trim();
     }
 
+    // Hmm, now let's try between the action and the word "to"
+    else if (verbs.length > 0 && to.length > 0) {
+        owner = getBetween(words, "VB", "TO", "outside").slice(0, -1).join(" ");
+    }
+
     // At this point, we can really only guess that
     // the owner is between the verb and the end of the
     // statement
     else if (verbs.length > 0) {
-        
-        owner = getBetween(words, ["VBZ", "VBP"], ".").slice(0, -1)
+
+        owner = getBetween(words, ["VBZ", "VBP"], ".").slice(0, -1);
 
         // Strip accidental determinates
         if (getType(owner[0]) === "DT") owner = owner.slice(1);
@@ -227,13 +232,21 @@ var classify = module.exports.classify = function(speech, debug) {
     // If there is a file within the statement, it's probably
     // the subject
     if (speech.match(fileEx) !== null) {
-        subject = speech.match(fileEx)[0].trim();
-    } 
+        
+        // Mainly this is to address
+        // "Convert file.x to format
+        if (to.length > 0) {
+            subject = getBetween(words, "TO", ["NN", "VB"]).join();
+        } else {
+            subject = speech.match(fileEx)[0].trim();
+        }
+
+    }
 
     // If there is a website within the statement, it's probably
     // the subject
     else if (websites.length > 0) {
-        subject = websites[0].trim()
+        subject = websites[0].trim();
     }
     
     // If ownership and there are prepositions, scan for words beween
@@ -243,8 +256,16 @@ var classify = module.exports.classify = function(speech, debug) {
 
         // To account for more than one preposition, we need to be able to filter between
         // either the inside or outside preposition
-        if (preps.length === 1) {
+
+        // This is nitpicky, but is the action a verb? If so, we need
+        // to run another piece of logic:
+        if (getType(action) !== "VB" && preps.length === 1) {
+            // yes : the subject is between the determiner/posessive
+            // and the preposition
             subject = getBetween(words, ["DT", "PRP$"], ["IN"], "outside");
+        }  else if (preps.length === 1) {
+            // no : the subject is between to/a posessive and a preposition
+            subject = getBetween(words, ["TO", "PRP$"], ["IN"], "outside");
         } else {
             subject = getBetween(words, ["IN", "DT", "PRP$"], ["IN", "NN", "."], "inside");
         }
@@ -288,6 +309,10 @@ var classify = module.exports.classify = function(speech, debug) {
         subject = subject.join(" ");
     }
 
+
+    // Let's check to make sure we properly treat file names
+    if (owner && fileEx.test(owner.split(" ").join("")))   owner = owner.split(" ").join("");
+    if (subject && fileEx.test(subject.split(" ").join(""))) subject = subject.split(" ").join("");
 
     
     // Now that everything is properly classified,

@@ -7,6 +7,10 @@
 // -------------------------------------------------- //
 
 require('colors');
+// Get the initial action
+var command = process.argv.slice(2).join(" ").trim();
+
+// -------------------------------------------------- //
 
 Nodebot = new(require("events").EventEmitter);
 
@@ -33,13 +37,20 @@ require("./brain/interaction")(Nodebot);
 
 // -------------------------------------------------- //
 
-// Get the initial action
-var command = process.argv.slice(2).join(" ").trim();
+Nodebot.boot = function() {
+    (command !== "") ? Nodebot.analyze(command) : Nodebot.request();    
+};
 
 // Take the proper initial action
 
 if (!module.parent) {
-    (command !== "") ? Nodebot.analyze(command) : Nodebot.request();    
+ 
+    process.on("exit", function() {
+        Nodebot.say("Goodbye, %s", Nodebot.lexicon.user.name.bold);
+    });
+
+    Nodebot.boot();
+
 }
 
 

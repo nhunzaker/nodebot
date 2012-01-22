@@ -6,6 +6,18 @@ A helper robot written for the busy developer.
 npm install nodebot -g
 ```
 
+### Example commands
+
+```
+$ nodebot What is the capital of Spain?
+
+$ nodebot is nodebot.js valid?
+
+$ nodebot watch ./nodebot.js
+
+$ nodebot how much free memory do I have?
+```
+
 ### Validate Javascript, CSS, and HTML (websites work too)
 ```
 $ nodebot

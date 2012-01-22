@@ -219,8 +219,8 @@ var classify = module.exports.classify = function(speech, debug) {
     }
 
     // Hmm, now let's try between the action and the word "to"
-    else if (verbs.length > 0 && to.length > 0) {
-        owner = getBetween(words, ["VB"], "TO").slice(0, -1).join(" ");
+    else if (to.length > 0) {
+        owner = getBetween(words, "VB", "TO").slice(0, -1).join(" ");
     }
 
     // At this point, we can really only guess that
@@ -257,9 +257,8 @@ var classify = module.exports.classify = function(speech, debug) {
 
     }
 
-    // If ownership and there are prepositions, scan for words beween
-    // prepositions, determinates, and posessive words and
-    // prepositions, nouns, and puncuation
+    // If ownership and there are prepositions, scan for words bteween
+    // determinates and posessive words, and prepositions
     else if (preps.length > 0) {
         
         subject = getBetween(words, ["DT", "PRP$"], ["IN"]);

@@ -3,9 +3,10 @@
 // "What is the capital of Spain?"
 // -------------------------------------------------- //
 
-var lang    = require("../brain/language")
-,   fileEx  = Nodebot.lexicon.file["regular expression"]
-,   request = require("request")
+var lang       = require("../brain/language")
+,   fileEx     = Nodebot.lexicon.file["regular expression"]
+,   request    = require("request")
+,   textAlign = require("../brain/formatter").textAlign;
 ;
 
 module.exports = function what (a) {
@@ -52,6 +53,9 @@ module.exports = function what (a) {
 
 
     // No, search WolframAlpha
+    // 
+    // For more information visit:
+    // http://www.wolframalpha.com/termsofuse.html#attributionandlicensing
     // -------------------------------------------------- //
 
     var app_id = "GVH84U-9YQ66P7PU3";
@@ -64,12 +68,11 @@ module.exports = function what (a) {
     ,   data = qs.stringify({ input: a.tokens.join(" ") })
     ;
 
-    
     nodebot.say("Hmm, I don't know off the top of my head. Give me a minute...");
 
     request.get("http://api.wolframalpha.com/v2/query?" + data + "&appid=" + app_id, function(err, data) {
 
-        var result = []
+        var result = [];
 
         parser.ontext = function(t) {
             var proc = t.trim();
@@ -83,17 +86,18 @@ module.exports = function what (a) {
                 nodebot.say("I just scanned the internet and couldn't find anything :(");
             }
 
-            nodebot.say("Here's what %s has to say:\n", "WolframAlpha".red.bold);
+            nodebot.say("Here's what I found:\n");
 
             var tidbit = [];
             
-            var width = 80;
-            var space = Array(~~((width/2) - (result[0].length / 2))).join(" ");
+            var width = 80
+            ,   hr    = Array(width).join("-")
+            ;
 
-            console.log(Array(width).join("-"));
-            console.log(space + result[0].bold.red);
-            console.log(Array(width).join("-"));
-
+            console.log(hr);
+            console.log(textAlign(result[0], 80, "center").bold.red);
+            console.log(hr);
+                        
             result = result.filter(function(i) { return i.trim() !== ""; });
 
             result.slice(1, 3).forEach(function(i) {
@@ -102,9 +106,15 @@ module.exports = function what (a) {
 
                 var term = tidbit[0];
 
-                console.log(term.bold.trim() + "\n" + tidbit.slice(1).join(":"));
+                console.log(term.bold.trim() + "\n" + tidbit.slice(1).join(":").trim());
 
             });
+
+            var credit = "Courtesy of " + "WolframAlpha" + " (http://www.wolframalpha.com)";
+
+            console.log(hr);
+            console.log(textAlign(credit, 80));
+            console.log(hr);
 
         };
         

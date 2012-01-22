@@ -58,7 +58,7 @@ module.exports = function watch (a) {
         switch(os.type()) {
             
         case "Darwin":
-            nodebot.say("I can't watch for directory changes on OSX, I'm sorry :(");
+            return nodebot.say("Node v%s doesn't have good fs.watch support on %s, I'm sorry :(", process.versions.node, "OSX".cyan);
             break;
 
         default:

@@ -37,7 +37,7 @@ bayes.train("", "neutral");
 
 say("Scanning Twitter...");
 
-twitter.search("obama", {
+twitter.search("class inequality", {
     rpp              :  "100",
     include_entities :  "true",
     result_type      :  "mixed",

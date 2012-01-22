@@ -12,13 +12,22 @@ var lexicon = {}
 module.exports = lexicon = {
 
     nodebot: {
+
         definition: "a robot, it lives to serve.",
+
         name: "Nodebot",
+
         'favorite color': "green".green.bold,
-        birthday: new Date().toString()
+
+        birthday: new Date().toString(),
+
+        time : function() {
+            return new Date().toString();
+        }
     },
 
     user: {
+
         name                : "Master",
 
         definition          : "my master.",
@@ -41,8 +50,8 @@ module.exports = lexicon = {
             for (var dev in ifaces) {
 
                 ifaces[dev].forEach(function(details){
-                                        if (details.family === 'IPv4') {
-                                            addresses += "\n" + ((details.internal) ? "   local - " : "external - ") + details.address;
+                    if (details.family === 'IPv4') {
+                        addresses += "\n" + ((details.internal) ? "   local - " : "external - ") + details.address;
                     }
                 });
             }
@@ -59,7 +68,7 @@ module.exports = lexicon = {
 
     'up' : {
         definition: "What's up? I'm not really sure, it's so hard to explain to "
-                    + "4 dimensional beings"
+            + "4 dimensional beings"
     },
 
 
@@ -74,6 +83,11 @@ module.exports = lexicon = {
         definition: system
     },
 
+    "time": {
+        definition: function() {
+            return new Date().toString();
+        }
+    },
 
     // Regular expression related items
     // -------------------------------------------------- //

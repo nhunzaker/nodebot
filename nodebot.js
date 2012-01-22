@@ -28,7 +28,7 @@ Nodebot.language = require("./brain/language");
 
 // All actions the nodebot can take
 Nodebot.actions = require("./actions");
- 
+
 // Adds the decision making module
 Nodebot.analyze = require("./brain/analyze");
 
@@ -44,12 +44,12 @@ Nodebot.boot = function() {
 // Take the proper initial action
 
 if (!module.parent) {
- 
+    
     process.on("exit", function() {
-        Nodebot.say("Goodbye, %s", Nodebot.lexicon.user.name.bold);
-    });
+        console.log("");
+});
 
-    Nodebot.boot();
+Nodebot.boot();
 
 }
 

@@ -5,7 +5,8 @@
 // and action for a statement
 //
 // Note: I am not a linguist, this is the result of
-// blood, sweat, and tears!
+// writing whatever logic it takes to get the tests
+// to work.
 //
 // Please help me make this better:
 // https://github.com/nhunzaker/nodebot
@@ -62,6 +63,18 @@ var getType = module.exports.getType = function (string) {
     
 };
 
+// Strips all words of specific type(s) from an array of words
+var stripTypes = module.exports.stripTypes = function(words, types) {
+
+    types = (typeof types === "string") ? [types] : types;
+
+    words = words.filter(function(w) {
+        return types.indexOf(getType(w)) < 0;
+    });
+    
+    return words;
+}
+
 
 // Finds all words between the last of the first and last
 // of two types
@@ -94,6 +107,11 @@ var getBetween = module.exports.getBetween = function(lex, type1, type2, form) {
 // Classifies all words in an array
 var getTypes = module.exports.getTypes = function (array, string, strict) {
 
+    // Is the array lexical?
+    if (typeof array[0] !== 'object') {
+        array = tagger.tag(array)
+    }
+
     var type = array.filter(function(word) {
 
         if (strict) {
@@ -117,10 +135,14 @@ var classify = module.exports.classify = function(speech, debug) {
     ,   action, subject, owner;
 
 
-    if (debug) {
-        console.log(tagged);
+    if (debug) console.log(tagged);
+
+
+    // Auto correct for missing punctuation
+    if (getType(words.slice(-1)[0]) !== ".") {
+        words.push(".");
     }
-    
+
     // Classify!
     // -------------------------------------------------- //
 
@@ -130,7 +152,6 @@ var classify = module.exports.classify = function(speech, debug) {
     ,   actions     = getTypes(tagged, "W")
     ,   adverbs     = getTypes(tagged, "R")
     ,   adjectives  = getTypes(tagged, "JJ")
-    ,   websites    = getTypes(tagged, "URL")
     ,   preps       = getTypes(tagged, "IN")
     ,   determiners = getTypes(tagged, "DT")
     ,   to          = getTypes(tagged, "TO")
@@ -162,6 +183,7 @@ var classify = module.exports.classify = function(speech, debug) {
     action = (action) ? action.toLowerCase() : action;
 
 
+
     // OWNERSHIP
     // Answers : "Who is associated with the target of the
     // action?"
@@ -172,18 +194,18 @@ var classify = module.exports.classify = function(speech, debug) {
 
     if (pronouns.length > 0 && action) {
 
-        owner = pronouns.slice(-1)[0];
+        // The answer must begin where the action starts
+        // ex: "Do you know [What time it is?]
+        var answer   = words.slice(words.indexOf(action))
+        ,   last_pro = pronouns.slice(-1)[0];
 
-        // More bulletproofing, if the owner word is not self-
-        // posessive and is found further  in the sentence than 
-        // the action, then we need to igore all of the 
-        // verbs/posessives before the action
-        //
-        // ex: "Do you know what the current directory is?"
-        if (getType(owner) !== "PRP$" && words.indexOf(owner) < words.indexOf(action)) {
-            owner = getBetween(words, ["DT"], "NN").join(" ");
+        if (answer.indexOf(last_pro) > 0 || getTypes(answer, "VB").length === 0) {
+            owner = last_pro;
+        } else {
+            owner = getBetween(answer, ["DT", "TO"], ".");
+            owner = stripTypes(owner, [".", "VB", "VBZ"]).join(" ");
         }
-
+        
     }
 
     // No ? Let's try between a preposition and 
@@ -191,19 +213,14 @@ var classify = module.exports.classify = function(speech, debug) {
     else if (determiners.length > 0 && preps.length > 0) {
 
         owner = getBetween(words, ["IN"], ["DT", "NN", "."]);
-
-        // Strip accidental determinates
-        if (getType(owner[0]) === "DT") owner = owner.slice(1);
-
-        // Strip accidental punctuation
-        if (getType(owner.slice(-1)[0]) === ".") owner = owner.slice(0, -1);
-
-        owner = owner.join(" ").trim();
+        
+        // Strip punctuation
+        owner = stripTypes(owner, ".").join(" ");
     }
 
     // Hmm, now let's try between the action and the word "to"
     else if (verbs.length > 0 && to.length > 0) {
-        owner = getBetween(words, ["VB"], "TO", "outside").slice(0, -1).join(" ");
+        owner = getBetween(words, ["VB"], "TO").slice(0, -1).join(" ");
     }
 
     // At this point, we can really only guess that
@@ -216,13 +233,8 @@ var classify = module.exports.classify = function(speech, debug) {
         // Do we have the word "I" in here?
         if (owner.indexOf("I") === 0) owner = owner.slice(0,1);
 
-        // Strip accidental determinates
-        if (getType(owner[0]) === "DT") owner = owner.slice(1);
-
-        // Strip accidental puncuation
-        if (getType(owner[0]) === ".") owner = owner.slice(1);
-
-        owner = owner.join(" ").trim();
+        // Strip accidental determinates and punctuation
+        owner = stripTypes(owner, ["DT", "."]).join(" ");
 
     }
 
@@ -245,80 +257,42 @@ var classify = module.exports.classify = function(speech, debug) {
 
     }
 
-    // If there is a website within the statement, it's probably
-    // the subject
-    else if (websites.length > 0) {
-        subject = websites[0].trim();
-    }
-    
     // If ownership and there are prepositions, scan for words beween
     // prepositions, determinates, and posessive words and
     // prepositions, nouns, and puncuation
-    else if (owner && preps.length > 0) {
-
-        // To account for more than one preposition, we need to be able to filter between
-        // either the inside or outside preposition
-
-        // This is nitpicky, but is the action a verb? If so, we need
-        // to run another piece of logic:
-        if (getType(action) !== "VB" && preps.length === 1) {
-            // yes : the subject is between the determiner/posessive
-            // and the preposition
-            subject = getBetween(words, ["DT", "PRP$"], ["IN"], "outside");
-        }  else if (preps.length === 1) {
-            // no : the subject is between to/a posessive and a preposition
-            subject = getBetween(words, ["TO", "PRP$"], ["IN"], "outside");
-        } else {
-            subject = getBetween(words, ["IN", "DT", "PRP$"], ["IN", "NN", "."], "inside");
-        }
-
-        // Autocorrect for trailing punctuation
-        if (getType(subject.slice(-1)[0]) === ".") {
-            subject = subject.slice(0, -1);
-        }
-
-        // Autocorrect for trailing ownership
-        if (subject.slice(-1)[0] === owner) {
-            subject = subject.slice(0, -1);
-        }
+    else if (preps.length > 0) {
         
-        // Autocorrect for trailing prepositions
-        if (getType(subject.slice(-1)[0]) === "IN") {
-            subject = subject.slice(0, -1);
-        }
+        subject = getBetween(words, ["DT", "PRP$"], ["IN"]);
 
-        subject = subject.join(" ").trim();
-
+        // Strip punctuaction, prepositions, and owners
+        subject = stripTypes(subject, [".", "IN"]).join(" ");
     } 
     
-    // Is the verb after the owner present tense?
+    // Is the owner "I" and the verb after the owner is present tense?
     // Helps with "How much memory do I have?"
     else if (owner === "I" && getType(words[words.indexOf(owner) + 1]) === "VBP") {
 
         var answer = words.slice(0, words.indexOf(owner));
-        subject = getBetween(answer, ["JJ"], ["VBP"]).slice(0, -1);
 
-        subject = subject.join(" ");
+        subject = getBetween(answer, ["JJ"], ["VBP"]).slice(0, -1).join(" ");
+
     }
- 
+
     // If there *is* ownership, and there are no prepositions
     // then the subject is inside the owner/determinate/verb and the last noun
     // (*phew...*)
+
     else if (owner && preps.length === 0) {
         
-        subject = getBetween(words, ["DT", "VBP", "PRP$"], "NN", "inside");
-        
-        // Strip accidental catches of the actions
-        if (subject[0] && subject[0].toLowerCase() === action) {
-            subject = subject.slice(1);
-        }
+        subject = getBetween(words, ["TO", "DT", "VBP", "PRP$"], ["NN", "RB"], "inside");
 
-        // Strip accidental present tense verbs
-        if (subject[0] && getType(subject[0]) === "VBZ") {
-            subject = subject.slice(1);
-        }
+        subject = subject.filter(function(s) {
+            s = s.toLowerCase();
+            return s !== action && getType(s) !== "VBZ" && s !== owner;
+        });
         
         subject = subject.join(" ");
+
     }
 
 
@@ -344,9 +318,8 @@ var classify = module.exports.classify = function(speech, debug) {
         
         // Tweak other non-specific possession cases to the last
         // recorded context
-    case "it": case "its": 
-    case "they": case "their": case "he": case "she": 
-    case "his": case "hers":
+    case "it": case "its": case "they": case "their":
+    case "he": case "she": case "his": case "hers":
         owner = Nodebot.memory.context;
         break;
     }

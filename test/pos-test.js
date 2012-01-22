@@ -392,6 +392,42 @@ vows.describe('Decipher speech').addBatch({
             assert.equal(topic.subject, "processors");
         }
 
+    },
+
+    'When asked, "How do you fly?"': {
+
+        topic: tagger.classify("How do you fly?"),
+        
+        'the action should be "how"': function (topic) {
+            assert.equal(topic.action, "how");
+        },
+
+        'the owner should be the nodebot': function (topic) {
+            assert.equal(topic.owner, "nodebot");
+        },
+
+        'the subject should be fly': function (topic) {
+            assert.equal(topic.subject, "fly");
+        }
+
+    },
+
+    'When asked, "Do you know how to fly?"': {
+
+        topic: tagger.classify("Do you know how to fly?"),
+        
+        'the action should be "how"': function (topic) {
+            assert.equal(topic.action, "how");
+        },
+
+        'the owner should be the nodebot': function (topic) {
+            assert.equal(topic.owner, "nodebot");
+        },
+
+        'the subject should be fly': function (topic) {
+            assert.equal(topic.subject, "fly");
+        }
+
     }
 
 

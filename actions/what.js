@@ -78,6 +78,11 @@ module.exports = function what (a) {
 
         parser.onend = function () {
 
+            // If nothing was found, then we have an issue
+            if (result.length === 0) {
+                nodebot.say("I just scanned the internet and couldn't find anything :(");
+            }
+
             nodebot.say("Here's what %s has to say:\n", "WolframAlpha".red.bold);
 
             var tidbit = [];

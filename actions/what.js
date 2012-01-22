@@ -33,7 +33,7 @@ module.exports = function what (a) {
     }
 
 
-    // Do we have a definition for ths subject?
+    // Do we have a definition for this subject?
     // -------------------------------------------------- //
 
     if (term) {

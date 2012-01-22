@@ -10,19 +10,16 @@
     },
 
     "dependencies": {
+
         "colors"            : "*",
 
-        "underscore.string" : "*",
         "underscore"        : "*",
         "growl"             : "*",
-
-
 
         "request"           : "*",
         "jquery"            : "*",
         "jshint"            : "*",
         "csslint"           : "*",
-
 
         "levenshtein"       : "1.0.0",
         "natural"           : "*",

@@ -1,0 +1,557 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/Users/nate/.nvm/v0.6.4/bin/npm', 'install', '-g' ]
+info using npm@1.1.0-alpha-6
+info using node@v0.6.4
+verbose config file /Users/nate/.npmrc
+verbose config file /Users/nate/.nvm/v0.6.4/etc/npmrc
+verbose config file /Users/nate/.nvm/v0.6.4/lib/node_modules/npm/npmrc
+verbose into /Users/nate/.nvm/v0.6.4/lib [ '.' ]
+verbose cache add .
+verbose cache add [ '.', null ]
+silly cache add: name, spec, args [ undefined, '.', [ '.', null ] ]
+verbose parsed url { pathname: '.', path: '.', href: '.' }
+verbose caching package.json
+verbose loadDefaults nodebot@0.1.6
+verbose pack /Users/nate/Sites/nodebot /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/tmp.tgz
+silly makeList /Users/nate/Sites/nodebot
+verbose caching /Users/nate/Sites/nodebot/sax-js/package.json
+verbose loadDefaults sax@0.3.5
+silly dir, dirLen [ '/Users/nate/Sites/nodebot/sax-js', 33 ]
+silly dir, dirLen [ '/Users/nate/Sites/nodebot', 26 ]
+verbose tarball /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/tmp.tgz
+verbose parent /Users/nate/Sites/nodebot
+verbose mkdir (expected) error ENOENT, no such file or directory '/var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm'
+verbose mkdir done: /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar undefined
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/.gitignore
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/nodebot.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/package.json
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/readme.md
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/actions
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/actions/how.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/actions/index.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/actions/relabel.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/actions/repeat.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/actions/validate.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/actions/watch.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/actions/what.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/actions/who.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/bin
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/bin/classifier.json
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/bin/lexicon.json
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/bin/nodebot
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/test
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/test/format-test.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/test/pos-test.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/test/time-test.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/validator
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/validator/css.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/validator/html.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/validator/javascript.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/validator/jshint_config.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/validator/reporter.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/validator/website.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/analyze.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/formatter.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/interaction.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/lexicon.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/language
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/language/index.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/language/newtrainer.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/language/tagger.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/time
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/brain/time/index.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/AUTHORS
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/LICENSE
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/package.json
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/README.md
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/big-not-pretty.xml
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/example.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/get-products.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/hello-world.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/not-pretty.xml
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/pretty-print.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/shopping.xml
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/strict.dtd
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/switch-bench.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/test.html
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/examples/test.xml
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/lib
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/lib/sax.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/buffer-overrun.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/cdata-chunked.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/cdata-end-split.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/cdata-fake-end.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/cdata-multiple.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/cdata.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/index.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/issue-23.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/issue-30.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/issue-35.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/issue-47.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/issue-49.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/parser-position.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/script.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/self-closing-child-strict.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/self-closing-child.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/self-closing-tag.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/stray-ending.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/trailing-non-whitespace.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/unquoted.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/xmlns-issue-41.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/xmlns-rebinding.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/xmlns-strict.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/xmlns-unbound.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/xmlns-xml-default-prefix-attribute.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/xmlns-xml-default-prefix.js
+silly asyncMap in gTP /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot/sax-js/test/xmlns-xml-default-redefine.js
+verbose gunzed /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot
+verbose rm'ed /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package
+verbose renamed [ '/var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/___package.npm/nodebot',
+verbose renamed   '/var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package' ]
+verbose caching /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package/package.json
+verbose loadDefaults nodebot@0.1.6
+verbose tarball contents [ 'package', 'tmp.tgz' ]
+verbose from cache /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package/package.json
+verbose pack /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package /Users/nate/.npm/nodebot/0.1.6/package.tgz
+silly makeList /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package
+verbose caching /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package/sax-js/package.json
+verbose loadDefaults sax@0.3.5
+silly dir, dirLen [ '/var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package/sax-js',
+silly dir, dirLen   115 ]
+silly dir, dirLen [ '/var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package',
+silly dir, dirLen   108 ]
+verbose tarball /Users/nate/.npm/nodebot/0.1.6/package.tgz
+verbose parent /var/folders/fy/cfrkc8f914v3hmmvxjvnft880000gn/T/npm-1327257508190/1327257508190-0.2582676764577627/package
+verbose mkdir (expected) error ENOENT, no such file or directory '/Users/nate/.npm/nodebot/0.1.6/___package.npm'
+verbose mkdir done: /Users/nate/.npm/nodebot/0.1.6/___package.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /Users/nate/.npm/nodebot/0.1.6/package
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar undefined
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/.gitignore
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/nodebot.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/package.json
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/readme.md
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/actions
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/actions/how.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/actions/index.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/actions/relabel.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/actions/repeat.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/actions/validate.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/actions/watch.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/actions/what.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/actions/who.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/bin
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/bin/classifier.json
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/bin/lexicon.json
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/bin/nodebot
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/test
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/test/format-test.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/test/pos-test.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/test/time-test.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/validator
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/validator/css.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/validator/html.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/validator/javascript.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/validator/jshint_config.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/validator/reporter.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/validator/website.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/analyze.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/formatter.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/interaction.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/lexicon.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/language
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/language/index.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/language/newtrainer.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/language/tagger.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/time
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/brain/time/index.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/AUTHORS
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/LICENSE
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/package.json
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/README.md
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/big-not-pretty.xml
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/example.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/get-products.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/hello-world.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/not-pretty.xml
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/pretty-print.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/shopping.xml
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/strict.dtd
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/switch-bench.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/test.html
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/examples/test.xml
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/lib
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/lib/sax.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/buffer-overrun.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/cdata-chunked.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/cdata-end-split.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/cdata-fake-end.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/cdata-multiple.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/cdata.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/index.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/issue-23.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/issue-30.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/issue-35.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/issue-47.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/issue-49.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/parser-position.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/script.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/self-closing-child-strict.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/self-closing-child.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/self-closing-tag.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/stray-ending.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/trailing-non-whitespace.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/unquoted.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/xmlns-issue-41.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/xmlns-rebinding.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/xmlns-strict.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/xmlns-unbound.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/xmlns-xml-default-prefix.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/xmlns-xml-default-prefix-attribute.js
+silly asyncMap in gTP /Users/nate/.npm/nodebot/0.1.6/___package.npm/package/sax-js/test/xmlns-xml-default-redefine.js
+verbose gunzed /Users/nate/.npm/nodebot/0.1.6/___package.npm/package
+verbose rm'ed /Users/nate/.npm/nodebot/0.1.6/package
+verbose renamed [ '/Users/nate/.npm/nodebot/0.1.6/___package.npm/package',
+verbose renamed   '/Users/nate/.npm/nodebot/0.1.6/package' ]
+verbose caching /Users/nate/.npm/nodebot/0.1.6/package/package.json
+verbose loadDefaults nodebot@0.1.6
+silly updated sha bytes 40960
+silly updated sha bytes 40960
+silly updated sha bytes 4902
+info shasum 2c80d5e1698f5b58dc0fc39d7ca36829a2f67188
+info shasum /Users/nate/.npm/nodebot/0.1.6/package.tgz
+verbose from cache /Users/nate/.npm/nodebot/0.1.6/package/package.json
+verbose chmod /Users/nate/.npm/nodebot/0.1.6/package.tgz 644
+verbose chown [ '/Users/nate/.npm/nodebot/0.1.6/package.tgz', 501, 20 ]
+silly resolved [ { name: 'nodebot',
+silly resolved     description: 'An artificial intelligence written for NodeJS',
+silly resolved     version: '0.1.6',
+silly resolved     homepage: '',
+silly resolved     engines: { node: '>=0.6.4' },
+silly resolved     dependencies: 
+silly resolved      { colors: '*',
+silly resolved        underscore: '*',
+silly resolved        growl: '*',
+silly resolved        request: '*',
+silly resolved        jquery: '*',
+silly resolved        jshint: '*',
+silly resolved        csslint: '*',
+silly resolved        levenshtein: '1.0.0',
+silly resolved        natural: '*',
+silly resolved        pos: '0.1.1' },
+silly resolved     author: { name: 'Nate Hunzaker' },
+silly resolved     main: './nodebot.js',
+silly resolved     bin: { nodebot: './bin/nodebot' },
+silly resolved     _npmUser: { name: 'natehunzaker', email: 'nate.hunzaker@gmail.com' },
+silly resolved     _id: 'nodebot@0.1.6',
+silly resolved     devDependencies: {},
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.1.0-alpha-6',
+silly resolved     _nodeVersion: 'v0.6.4',
+silly resolved     _defaultsLoaded: true,
+silly resolved     dist: { shasum: '2c80d5e1698f5b58dc0fc39d7ca36829a2f67188' },
+silly resolved     scripts: {} } ]
+info into /Users/nate/.nvm/v0.6.4/lib nodebot@0.1.6
+info installOne nodebot@0.1.6
+info unbuild /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot
+verbose caching /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot/package.json
+verbose loadDefaults nodebot@0.1.6
+info preuninstall nodebot@0.1.6
+info uninstall nodebot@0.1.6
+verbose unbuild nodebot@0.1.6 [ true,
+verbose unbuild nodebot@0.1.6   '/Users/nate/.nvm/v0.6.4/lib/node_modules',
+verbose unbuild nodebot@0.1.6   '/Users/nate/.nvm/v0.6.4/lib/node_modules' ]
+verbose binRoot [ '/Users/nate/.nvm/v0.6.4/bin', { nodebot: './bin/nodebot' } ]
+info postuninstall nodebot@0.1.6
+verbose from cache /Users/nate/.npm/nodebot/0.1.6/package/package.json
+verbose mkdir (expected) error ENOENT, no such file or directory '/Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm'
+verbose mkdir done: /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm 755
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot
+silly gunzTarPerm modes [ '755', '644' ]
+silly afterUntar undefined
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/.gitignore
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/nodebot.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/package.json
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/readme.md
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/actions
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/actions/how.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/actions/index.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/actions/relabel.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/actions/repeat.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/actions/validate.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/actions/watch.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/actions/what.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/actions/who.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/bin
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/bin/classifier.json
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/bin/lexicon.json
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/bin/nodebot
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/test
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/test/format-test.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/test/pos-test.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/test/time-test.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/validator
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/validator/css.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/validator/html.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/validator/javascript.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/validator/jshint_config.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/validator/reporter.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/validator/website.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/AUTHORS
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/LICENSE
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/package.json
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/README.md
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/big-not-pretty.xml
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/example.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/get-products.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/hello-world.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/not-pretty.xml
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/pretty-print.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/shopping.xml
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/strict.dtd
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/switch-bench.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/test.html
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/examples/test.xml
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/lib
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/lib/sax.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/buffer-overrun.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/cdata-chunked.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/cdata-end-split.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/cdata-fake-end.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/cdata-multiple.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/cdata.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/index.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/issue-23.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/issue-30.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/issue-35.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/issue-47.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/issue-49.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/parser-position.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/script.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/self-closing-child-strict.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/self-closing-child.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/self-closing-tag.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/stray-ending.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/trailing-non-whitespace.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/unquoted.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/xmlns-issue-41.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/xmlns-rebinding.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/xmlns-strict.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/xmlns-unbound.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/xmlns-xml-default-prefix-attribute.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/xmlns-xml-default-prefix.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/sax-js/test/xmlns-xml-default-redefine.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/analyze.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/formatter.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/interaction.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/lexicon.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/language
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/language/index.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/language/newtrainer.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/language/tagger.js
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/time
+silly asyncMap in gTP /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package/brain/time/index.js
+verbose gunzed /Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package
+verbose rm'ed /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot
+verbose renamed [ '/Users/nate/.nvm/v0.6.4/lib/node_modules/___nodebot.npm/package',
+verbose renamed   '/Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot' ]
+verbose caching /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot/package.json
+verbose loadDefaults nodebot@0.1.6
+info preinstall nodebot@0.1.6
+verbose from cache /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot/package.json
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot [ 'colors@*',
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot   'underscore@*',
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot   'growl@*',
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot   'request@*',
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot   'jquery@*',
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot   'jshint@*',
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot   'csslint@*',
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot   'levenshtein@1.0.0',
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot   'natural@*',
+verbose into /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot   'pos@0.1.1' ]
+verbose cache add colors@*
+verbose cache add [ 'colors@*', null ]
+silly cache add: name, spec, args [ undefined, 'colors@*', [ 'colors@*', null ] ]
+verbose parsed url { pathname: 'colors@*', path: 'colors@*', href: 'colors@*' }
+silly cache add: name, spec, args [ 'colors', '*', [ 'colors', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+info addNamed [ 'colors', '*' ]
+verbose addNamed [ null, '' ]
+verbose cache add underscore@*
+verbose cache add [ 'underscore@*', null ]
+silly cache add: name, spec, args [ undefined, 'underscore@*', [ 'underscore@*', null ] ]
+verbose parsed url { pathname: 'underscore@*',
+verbose parsed url   path: 'underscore@*',
+verbose parsed url   href: 'underscore@*' }
+silly cache add: name, spec, args [ 'underscore', '*', [ 'underscore', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+info addNamed [ 'underscore', '*' ]
+verbose addNamed [ null, '' ]
+verbose cache add growl@*
+verbose cache add [ 'growl@*', null ]
+silly cache add: name, spec, args [ undefined, 'growl@*', [ 'growl@*', null ] ]
+verbose parsed url { pathname: 'growl@*', path: 'growl@*', href: 'growl@*' }
+silly cache add: name, spec, args [ 'growl', '*', [ 'growl', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+info addNamed [ 'growl', '*' ]
+verbose addNamed [ null, '' ]
+verbose cache add request@*
+verbose cache add [ 'request@*', null ]
+silly cache add: name, spec, args [ undefined, 'request@*', [ 'request@*', null ] ]
+verbose parsed url { pathname: 'request@*', path: 'request@*', href: 'request@*' }
+silly cache add: name, spec, args [ 'request', '*', [ 'request', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+info addNamed [ 'request', '*' ]
+verbose addNamed [ null, '' ]
+verbose cache add jquery@*
+verbose cache add [ 'jquery@*', null ]
+silly cache add: name, spec, args [ undefined, 'jquery@*', [ 'jquery@*', null ] ]
+verbose parsed url { pathname: 'jquery@*', path: 'jquery@*', href: 'jquery@*' }
+silly cache add: name, spec, args [ 'jquery', '*', [ 'jquery', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+info addNamed [ 'jquery', '*' ]
+verbose addNamed [ null, '' ]
+verbose cache add jshint@*
+verbose cache add [ 'jshint@*', null ]
+silly cache add: name, spec, args [ undefined, 'jshint@*', [ 'jshint@*', null ] ]
+verbose parsed url { pathname: 'jshint@*', path: 'jshint@*', href: 'jshint@*' }
+silly cache add: name, spec, args [ 'jshint', '*', [ 'jshint', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+info addNamed [ 'jshint', '*' ]
+verbose addNamed [ null, '' ]
+verbose cache add csslint@*
+verbose cache add [ 'csslint@*', null ]
+silly cache add: name, spec, args [ undefined, 'csslint@*', [ 'csslint@*', null ] ]
+verbose parsed url { pathname: 'csslint@*', path: 'csslint@*', href: 'csslint@*' }
+silly cache add: name, spec, args [ 'csslint', '*', [ 'csslint', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+info addNamed [ 'csslint', '*' ]
+verbose addNamed [ null, '' ]
+verbose cache add levenshtein@1.0.0
+verbose cache add [ 'levenshtein@1.0.0', null ]
+silly cache add: name, spec, args [ undefined, 'levenshtein@1.0.0', [ 'levenshtein@1.0.0', null ] ]
+verbose parsed url { pathname: 'levenshtein@1.0.0',
+verbose parsed url   path: 'levenshtein@1.0.0',
+verbose parsed url   href: 'levenshtein@1.0.0' }
+silly cache add: name, spec, args [ 'levenshtein', '1.0.0', [ 'levenshtein', '1.0.0' ] ]
+verbose parsed url { pathname: '1.0.0', path: '1.0.0', href: '1.0.0' }
+info addNamed [ 'levenshtein', '1.0.0' ]
+verbose addNamed [ '1.0.0', '1.0.0' ]
+verbose cache add natural@*
+verbose cache add [ 'natural@*', null ]
+silly cache add: name, spec, args [ undefined, 'natural@*', [ 'natural@*', null ] ]
+verbose parsed url { pathname: 'natural@*', path: 'natural@*', href: 'natural@*' }
+silly cache add: name, spec, args [ 'natural', '*', [ 'natural', '*' ] ]
+verbose parsed url { pathname: '*', path: '*', href: '*' }
+info addNamed [ 'natural', '*' ]
+verbose addNamed [ null, '' ]
+verbose cache add pos@0.1.1
+verbose cache add [ 'pos@0.1.1', null ]
+silly cache add: name, spec, args [ undefined, 'pos@0.1.1', [ 'pos@0.1.1', null ] ]
+verbose parsed url { pathname: 'pos@0.1.1', path: 'pos@0.1.1', href: 'pos@0.1.1' }
+silly cache add: name, spec, args [ 'pos', '0.1.1', [ 'pos', '0.1.1' ] ]
+verbose parsed url { pathname: '0.1.1', path: '0.1.1', href: '0.1.1' }
+info addNamed [ 'pos', '0.1.1' ]
+verbose addNamed [ '0.1.1', '0.1.1' ]
+verbose GET growl
+verbose raw, before any munging growl
+verbose url resolving [ 'https://registry.npmjs.org/', './growl' ]
+verbose url resolved https://registry.npmjs.org/growl
+verbose etag "6IM785QIQ19CNZ6T98QGN2BZ2"
+verbose GET colors
+verbose raw, before any munging colors
+verbose url resolving [ 'https://registry.npmjs.org/', './colors' ]
+verbose url resolved https://registry.npmjs.org/colors
+verbose etag "139UU3RF8NNR4JT0X15E0MDCK"
+verbose GET underscore
+verbose raw, before any munging underscore
+verbose url resolving [ 'https://registry.npmjs.org/', './underscore' ]
+verbose url resolved https://registry.npmjs.org/underscore
+verbose etag "ZPV62ESXTKJ0BTXD0U0PP8FF"
+verbose GET jshint
+verbose raw, before any munging jshint
+verbose url resolving [ 'https://registry.npmjs.org/', './jshint' ]
+verbose url resolved https://registry.npmjs.org/jshint
+verbose etag "19AVGD1KFH3W6C2HX2HJF1K4D"
+verbose GET jquery
+verbose raw, before any munging jquery
+verbose url resolving [ 'https://registry.npmjs.org/', './jquery' ]
+verbose url resolved https://registry.npmjs.org/jquery
+verbose etag "CJ7BNP9GOXUN4340GKX85WGFD"
+verbose GET request
+verbose raw, before any munging request
+verbose url resolving [ 'https://registry.npmjs.org/', './request' ]
+verbose url resolved https://registry.npmjs.org/request
+verbose etag "BFDZZGL7OFP5F6AYZUXQXJM9W"
+verbose GET csslint
+verbose raw, before any munging csslint
+verbose url resolving [ 'https://registry.npmjs.org/', './csslint' ]
+verbose url resolved https://registry.npmjs.org/csslint
+verbose etag "JJAL94TN26RR2MHS9SMHPLPB"
+verbose about to build /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot
+ERR! error installing nodebot@0.1.6 Error: getaddrinfo ENOENT
+ERR! error installing nodebot@0.1.6     at errnoException (dns.js:31:11)
+ERR! error installing nodebot@0.1.6     at Object.onanswer [as oncomplete] (dns.js:140:16)
+info unbuild /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot
+verbose from cache /Users/nate/.nvm/v0.6.4/lib/node_modules/nodebot/package.json
+info preuninstall nodebot@0.1.6
+verbose GET levenshtein/1.0.0
+verbose raw, before any munging levenshtein/1.0.0
+verbose url resolving [ 'https://registry.npmjs.org/', './levenshtein/1.0.0' ]
+verbose url resolved https://registry.npmjs.org/levenshtein/1.0.0
+verbose etag "COMKFSB7AS5UNYQRP6HE7ZQMM"
+verbose GET pos/0.1.1
+verbose raw, before any munging pos/0.1.1
+verbose url resolving [ 'https://registry.npmjs.org/', './pos/0.1.1' ]
+verbose url resolved https://registry.npmjs.org/pos/0.1.1
+verbose etag "4OSHW8Y4A3552AILVT3EXTFYL"
+verbose GET natural
+verbose raw, before any munging natural
+verbose url resolving [ 'https://registry.npmjs.org/', './natural' ]
+verbose url resolved https://registry.npmjs.org/natural
+verbose etag "AFCW5I0RWC9LLA7OIACBBXTD8"
+info uninstall nodebot@0.1.6
+verbose unbuild nodebot@0.1.6 [ true,
+verbose unbuild nodebot@0.1.6   '/Users/nate/.nvm/v0.6.4/lib/node_modules',
+verbose unbuild nodebot@0.1.6   '/Users/nate/.nvm/v0.6.4/lib/node_modules' ]
+verbose binRoot [ '/Users/nate/.nvm/v0.6.4/bin', { nodebot: './bin/nodebot' } ]
+info postuninstall nodebot@0.1.6
+verbose installOne cb nodebot@0.1.6
+ERR! Error: getaddrinfo ENOENT
+ERR!     at errnoException (dns.js:31:11)
+ERR!     at Object.onanswer [as oncomplete] (dns.js:140:16)
+ERR! Report this *entire* log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Darwin 11.2.0
+ERR! command "node" "/Users/nate/.nvm/v0.6.4/bin/npm" "install" "-g"
+ERR! cwd /Users/nate/Sites/nodebot
+ERR! node -v v0.6.4
+ERR! npm -v 1.1.0-alpha-6
+ERR! syscall getaddrinfo
+ERR! code ENOTFOUND
+ERR! message getaddrinfo ENOENT
+verbose exit [ 1, true ]

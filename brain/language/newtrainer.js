@@ -25,7 +25,7 @@ var bayes = new brain.BayesianClassifier({
         options: {
             hostname: 'localhost', // this is the default
             port: 6379,
-            name: 'sentiment' // namespace so you can persist training
+            name: 'sentiment'      // namespace so you can persist training
         }
     }
 });

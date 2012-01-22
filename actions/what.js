@@ -83,7 +83,8 @@ module.exports = function what (a) {
 
             // If nothing was found, then we have an issue
             if (result.length === 0) {
-                nodebot.say("I just scanned the internet and couldn't find anything :(");
+                nodebot.say("I couldn't find anything, sorry :(");
+                return nodebot.request();
             }
 
             nodebot.say("Here's what I found:\n");
@@ -116,6 +117,8 @@ module.exports = function what (a) {
             console.log(textAlign(credit, 80));
             console.log(hr);
 
+            return nodebot.request();
+            
         };
         
         parser.write(data.body).close();

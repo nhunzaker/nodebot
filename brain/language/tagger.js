@@ -162,7 +162,6 @@ var classify = module.exports.classify = function(speech, debug) {
     action = (action) ? action.toLowerCase() : action;
 
 
-
     // OWNERSHIP
     // Answers : "Who is associated with the target of the
     // action?"
@@ -204,7 +203,7 @@ var classify = module.exports.classify = function(speech, debug) {
 
     // Hmm, now let's try between the action and the word "to"
     else if (verbs.length > 0 && to.length > 0) {
-        owner = getBetween(words, "VB", "TO", "outside").slice(0, -1).join(" ");
+        owner = getBetween(words, ["VB"], "TO", "outside").slice(0, -1).join(" ");
     }
 
     // At this point, we can really only guess that
@@ -212,7 +211,10 @@ var classify = module.exports.classify = function(speech, debug) {
     // statement
     else if (verbs.length > 0) {
 
-        owner = getBetween(words, ["VBZ", "VBP"], ".").slice(0, -1);
+        owner = getBetween(words, ["VBZ", "VBP"], ["."]).slice(0, -1);
+
+        // Do we have the word "I" in here?
+        if (owner.indexOf("I") === 0) owner = owner.slice(0,1);
 
         // Strip accidental determinates
         if (getType(owner[0]) === "DT") owner = owner.slice(1);
@@ -288,14 +290,24 @@ var classify = module.exports.classify = function(speech, debug) {
         subject = subject.join(" ").trim();
 
     } 
+    
+    // Is the verb after the owner present tense?
+    // Helps with "How much memory do I have?"
+    else if (owner === "I" && getType(words[words.indexOf(owner) + 1]) === "VBP") {
+
+        var answer = words.slice(0, words.indexOf(owner));
+        subject = getBetween(answer, ["JJ"], ["VBP"]).slice(0, -1);
+
+        subject = subject.join(" ");
+    }
  
     // If there *is* ownership, and there are no prepositions
     // then the subject is inside the owner/determinate/verb and the last noun
     // (*phew...*)
     else if (owner && preps.length === 0) {
-
+        
         subject = getBetween(words, ["DT", "VBP", "PRP$"], "NN", "inside");
-
+        
         // Strip accidental catches of the actions
         if (subject[0] && subject[0].toLowerCase() === action) {
             subject = subject.slice(1);
@@ -349,6 +361,8 @@ var classify = module.exports.classify = function(speech, debug) {
         subject : subject,
         tokens  : words
     };
+
+    debug && console.log(ret);
 
     return ret;
 }

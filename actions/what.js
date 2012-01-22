@@ -54,34 +54,22 @@ module.exports = function what (a) {
     // No, search WolframAlpha
     // -------------------------------------------------- //
 
-    var qs = require('querystring');
+    var app_id = "GVH84U-9YQ66P7PU3";
 
-    var sax = require("../sax-js"),
-    strict = true, // set to false for html-mode
-    parser = sax.parser(strict);
+    var qs = require('querystring')
+    ,   sax    = require("../sax-js")
+    ,   strict = true
+    ,   parser = sax.parser(strict)
+    ,   request = require("request")
+    ,   data = qs.stringify({ input: a.tokens.join(" ") })
+    ;
 
-    var request = require("request");
-
-    var app_id = "GVH84U-9YQ66P7PU3"
-    ,   repl   = require('repl');
     
     nodebot.say("Hmm, I don't know off the top of my head. Give me a minute...");
 
-    var result = [];
-    
-    var data = qs.stringify({ input: a.tokens.join(" ") });
-
     request.get("http://api.wolframalpha.com/v2/query?" + data + "&appid=" + app_id, function(err, data) {
 
-        nodebot.say("Here's what %s has to say:", "WolframAlpha".red.bold);
-
-        parser.onopentag = function(tag){
-            console.log(tag);
-            parser.onattribute = function(att) {
-//                console.log(att);
-            };
-
-        }
+        var result = []
 
         parser.ontext = function(t) {
             var proc = t.trim();
@@ -89,8 +77,30 @@ module.exports = function what (a) {
         };
 
         parser.onend = function () {
-            info = result;
-            repl.start("> ");
+
+            nodebot.say("Here's what %s has to say:\n", "WolframAlpha".red.bold);
+
+            var tidbit = [];
+            
+            var width = 80;
+            var space = Array(~~((width/2) - (result[0].length / 2))).join(" ");
+
+            console.log(Array(width).join("-"));
+            console.log(space + result[0].bold.red);
+            console.log(Array(width).join("-"));
+
+            result = result.filter(function(i) { return i.trim() !== ""; });
+
+            result.slice(1, 3).forEach(function(i) {
+
+                tidbit = i.split("|");
+
+                var term = tidbit[0];
+
+                console.log(term.bold.trim() + "\n" + tidbit.slice(1).join(":"));
+
+            });
+
         };
         
         parser.write(data.body).close();
@@ -98,22 +108,5 @@ module.exports = function what (a) {
 
     });
 
-    
-    /*
-      nodebot.ask("Hmm... I can't remember. Care to tell me what " + lang.possessify(owner) + " " + subject + " is?", function(text) {
-
-      if (text[0].toLowerCase() === "no") {
-      nodebot.say("Okay, I'll forget you ever asked.");
-      return nodebot.request();
-      }
-      
-      nodebot.lexicon[owner] = nodebot.lexicon[owner] || {};
-      nodebot.lexicon[owner][subject] = text;
-
-      nodebot.say("Great, now I know!");
-      
-      return nodebot.request();
-      });
-    */
     return;
 };

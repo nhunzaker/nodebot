@@ -356,6 +356,42 @@ vows.describe('Decipher speech').addBatch({
             assert.equal(topic.owner, Nodebot.memory.context);
         }
 
+    },
+
+    'When asked, "How much memory do I have?"': {
+
+        topic: tagger.classify("How much memory do I have?"),
+        
+        'the action should be "how"': function (topic) {
+            assert.equal(topic.action, "how");
+        },
+
+        'the owner should be the user': function (topic) {
+            assert.equal(topic.owner, "user");
+        },
+
+        'the subject should be memory': function (topic) {
+            assert.equal(topic.subject, "memory");
+        }
+
+    },
+
+    'When asked, "How many processors do I have?"': {
+
+        topic: tagger.classify("How many processors do I have?"),
+        
+        'the action should be "how"': function (topic) {
+            assert.equal(topic.action, "how");
+        },
+
+        'the owner should be the user': function (topic) {
+            assert.equal(topic.owner, "user");
+        },
+
+        'the subject should be processors': function (topic) {
+            assert.equal(topic.subject, "processors");
+        }
+
     }
 
 

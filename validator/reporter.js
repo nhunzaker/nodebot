@@ -2,11 +2,13 @@
 // Prints the validation report
 // --------------------------------------------------- //
 
-var hr = "----------------------------------------------------------------------------------------------"
-,   colors = ['blue', 'yellow', 'red'];
+var colors = ['blue', 'yellow', 'red', 'white']
+,   width  = 80
+,   hr     = Array(width).join("-")
+;
 
 
-module.exports = function(report) {
+module.exports = function(report, callback) {
 
     var info = report.filter(function(i) { return (i.type === "info"); })
     ,   warn = report.filter(function(i) { return (i.type === "warning"); })
@@ -28,7 +30,8 @@ module.exports = function(report) {
 
             var spot = (e.line + ":" + e.character)
             ,   message = (whitespace(spot.length) + clump(e.reason, 13, spot.length + 7));
-            console.log(" " + spot[color].bold +  message[color]);
+            
+            return console.log(" " + spot[color].bold +  message[color]);
         });
         
         if (a.length > 0) {

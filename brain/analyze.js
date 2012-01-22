@@ -9,7 +9,7 @@ module.exports = function (data) {
 
     var a = tagger.classify.apply(n, [data]);
 
-    if (!a.action || (!owner && subject === "")) {
+    if (!a.action || (!a.owner && a.subject === "")) {
         n.say("I'm not sure what you are asking me to do, please clarify");
         return n.request();
     }

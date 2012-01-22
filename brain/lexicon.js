@@ -2,7 +2,14 @@
 // The Nodebot Lexicon
 // -------------------------------------------------- //
 
-var lexicon = module.exports = {
+var lexicon = {}
+,   os     = require("os")
+,   home   = process.cwd()
+,   system = os.type().replace("Darwin", "OSX") + os.release() + "(" + os.arch() + ")"
+;
+
+
+module.exports = lexicon = {
 
     nodebot: {
         definition: "a robot, it lives to serve.",
@@ -12,15 +19,19 @@ var lexicon = module.exports = {
     },
 
     user: {
-        name: "Master",
+        name                : "Master",
 
-        definition: "my master.",
+        definition          : "my master.",
         
-        "current directory": function() {
-            return process.cwd();
-        },
+        "current directory" : home,
         
-        'ip address': function() {
+        "operating system"  : system,
+        
+        "host name"         : os.hostname(),
+
+        "free memory"       : (os.freemem() / 1000000) + "MB",
+        
+        'ip address'        : function() {
 
             var os        = require('os')
             ,   ifaces    = os.networkInterfaces()
@@ -52,13 +63,15 @@ var lexicon = module.exports = {
     },
 
 
-    // Files
+    // OS Lex
     // ---------- //
 
     "current directory" : {
-        definition: function() {
-            return process.cwd();
-        }
+        definition: home        
+    },
+
+    "operating system" : {
+        definition: system
     },
 
 

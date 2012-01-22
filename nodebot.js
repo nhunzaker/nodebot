@@ -28,7 +28,7 @@ Nodebot.language = require("./brain/language");
 
 // All actions the nodebot can take
 Nodebot.actions = require("./actions");
-
+ 
 // Adds the decision making module
 Nodebot.analyze = require("./brain/analyze");
 

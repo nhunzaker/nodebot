@@ -27,10 +27,7 @@ $ nodebot how much free memory do I have?
 
 ### Validate Javascript, CSS, and HTML (websites work too)
 ```
-$ nodebot
-
-Nodebot: What can I help you with?
- Response: is nodebot.js valid?
+$ nodebot is nodebot.js valid?
 
 Nodebot: Oh snap! I found 1 error in nodebot.js: 
 ----------------------------------

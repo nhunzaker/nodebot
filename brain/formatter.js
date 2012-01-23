@@ -87,11 +87,11 @@ module.exports.clump = function clump (words, limit, lineOffset) {
     
     // Now, create the left margin by compressing an array
     // into a string
-    offset = new Array(lineOffset).join(" ");
+    offset = Array(lineOffset).join(" ");
 
     // Filter whitespace and pull everthing together
-    clump = clump.filter(function(c) { 
-        return c !== "\n" && c !== "";
+    clump = clump.map(function(c) { 
+        return c.trim()
     }).join("\n" + offset).slice(0, -1);
     
     return clump;

@@ -105,11 +105,11 @@ module.exports = function what (a) {
             result.slice(1, 4).forEach(function(i) {
                 
                 if (i.split("|").length > 1) {
-                    console.log(i.split("|").join(": "));
+                    console.log(format.clump(i.split("|").join(": ")));
                     
                 } else {
-                    var message = "\n" + i.split("\n").join(". ").trim();
-                    console.log(format.clump(message, 76));
+                    var message = i.split("\n").join(". ").trim();
+                    console.log("\n" + format.clump(message, 76));
                 }
 
             });

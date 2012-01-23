@@ -41,7 +41,7 @@ module.exports = function watch (a) {
         
         if (content !== nodebot.memory.watched_content) {
             nodebot.say("Looks like something has changed on " + file.blue.bold);
-            actions.validate.apply(nodebot, [a, true]);
+            nodebot.actions.validate.apply(nodebot, [a, true]);
 
             // Update with new content
             nodebot.memory.watched_content = content;

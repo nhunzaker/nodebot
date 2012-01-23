@@ -1,5 +1,5 @@
 // Nodebot.js
-// 
+//
 // Description: A helper robot that lives to serve
 // Author: Nate Hunzaker
 // -------------------------------------------------- //
@@ -12,7 +12,7 @@ var command = process.argv.slice(2).join(" ").trim();
 
 // -------------------------------------------------- //
 
-Nodebot = new(require("events").EventEmitter);
+Nodebot = new(require("events").EventEmitter)();
 
 // short term memory
 Nodebot.memory  = {
@@ -38,7 +38,7 @@ require("./brain/interaction")(Nodebot);
 // -------------------------------------------------- //
 
 Nodebot.boot = function() {
-    (command !== "") ? Nodebot.analyze(command) : Nodebot.request();    
+    (command !== "") ? Nodebot.analyze(command) : Nodebot.request();
 };
 
 // Take the proper initial action
@@ -47,9 +47,9 @@ if (!module.parent) {
     
     process.on("exit", function() {
         console.log("");
-});
+    });
 
-Nodebot.boot();
+    Nodebot.boot();
 
 }
 

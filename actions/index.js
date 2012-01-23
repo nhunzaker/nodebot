@@ -10,7 +10,7 @@ var actions = {};
 actions.who = require("./who");
 
 // Relabel
-actions.relabel = require("./relabel");
+actions.relabel = actions.set === require("./relabel");
 
 // What
 actions.what = require(__dirname + "/what");

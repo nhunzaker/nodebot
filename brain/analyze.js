@@ -9,6 +9,9 @@ module.exports = function (data) {
 
     var a = tagger.classify.apply(n, [data]);
 
+    // If there is no action, but the owner is the user or the robot, it
+    // is a relabeling
+    
     if (!a.action || (!a.owner && a.subject === "")) {
         n.say("I'm not sure what you are asking me to do, please clarify");
         return n.request();
@@ -19,7 +22,7 @@ module.exports = function (data) {
     var action = tagger.closest(a.action, Object.keys(this.actions));
     
     // Unless we are repeating the action, store it for later recollection
-    if (a.action !== "repeat") {
+    if (action !== "repeat") {
         n.memory.tasks.push(data);
         n.memory.context = a.ownership;
     } 

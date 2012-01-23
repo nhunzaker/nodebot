@@ -30,7 +30,7 @@ module.exports = function validate (a, skipRequest) {
 
     function dispatch(fileType) {
         require("../validator/" + fileType).validate.apply(nodebot, [target,  function cb() {
-            return (!skipRequest) ? false : nodebot.request();
+            return (skipRequest) ? false : nodebot.request();
         }]);
     }
 

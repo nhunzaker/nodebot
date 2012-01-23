@@ -23,9 +23,12 @@ module.exports.validate = function(file, callback) {
         
         // Report errors
         validator.errors.forEach(function(error){
+
             if (error === null) return false;
+
             error.type = "error";
-            report.push(error);
+
+            return report.push(error);
         });
         
         generate_report(report);

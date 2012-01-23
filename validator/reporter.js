@@ -5,10 +5,12 @@
 var colors = ['blue', 'yellow', 'red', 'white']
 ,   width  = 80
 ,   hr     = Array(width).join("-")
+,   clump  = require("../brain/formatter").clump
+,   space  = require("../brain/formatter").whitespace
 ;
 
 
-module.exports = function(report, callback) {
+module.exports = function(report) {
 
     var info = report.filter(function(i) { return (i.type === "info"); })
     ,   warn = report.filter(function(i) { return (i.type === "warning"); })
@@ -29,9 +31,10 @@ module.exports = function(report, callback) {
             if (!e.line || !e.character) return false;
 
             var spot = (e.line + ":" + e.character)
-            ,   message = (whitespace(spot.length) + clump(e.reason, 13, spot.length + 7));
+            ,   message = (space(spot.length) + clump(e.reason, 75, spot.length + 7));
             
             return console.log(" " + spot[color].bold +  message[color]);
+
         });
         
         if (a.length > 0) {
@@ -41,48 +44,3 @@ module.exports = function(report, callback) {
     });
 
 };
-
-
-// A whitespace generator
-// Creates a blank Array and stitches it together
-// -------------------------------------------------- //
-
-function whitespace (length) {
-
-    var num   = Math.abs(12 - (length || 0))
-    ,   space = Array(num);
-
-    return space.join(" ");
-}
-
-
-// Keeps lines at a specific word count
-// and keeps them in proper left alignment
-// -------------------------------------------------- //
-
-function clump (string, limit, lineOffset) {
-    
-    limit      = limit || 12;
-    lineOffset = lineOffset || 20;
-    
-    var clump  = []
-    ,   len    = string.length / limit
-    ,   offset = "";
-    
-    // For eachline
-    for (var i = 0; i < len; i++) {
-        clump.push( string.split(" ").slice(i * limit, (i + 1) * limit).join(" ") );
-    }
-    
-    // Now, create the left margin by compressing an array
-    // into a string
-    offset = new Array(lineOffset).join(" ");
-
-    // Filter whitespace and pull everthing together
-    clump = clump.filter(function(c) { 
-        return c !== "\n" && c !== "";
-    }).join("\n" + offset).slice(0, -1);
-    
-    return clump;
-
-}

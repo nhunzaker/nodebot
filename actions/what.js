@@ -6,8 +6,9 @@
 var lang       = require("../brain/language")
 ,   fileEx     = Nodebot.lexicon.file["regular expression"]
 ,   request    = require("request")
-,   textAlign = require("../brain/formatter").textAlign;
+,   format     = require("../brain/formatter")
 ;
+
 
 module.exports = function what (a) {
 
@@ -22,7 +23,7 @@ module.exports = function what (a) {
     ;
     
     // Just some more bullet proofing for the subject
-    if (owner === subject) subject === "definition";
+    subject = (owner === subject) ? "definition" : subject;
 
     // If the term is a function, call it to determin the value
     if (typeof term === "function") term = term().toString();
@@ -68,7 +69,7 @@ module.exports = function what (a) {
     ,   data = qs.stringify({ input: a.tokens.join(" ") })
     ;
 
-    nodebot.say("Hmm, I don't know off the top of my head. Give me a minute...");
+    nodebot.say("Hmm, I don't know off the top of my head. Let me ask around...");
 
     request.get("http://api.wolframalpha.com/v2/query?" + data + "&appid=" + app_id, function(err, data) {
 
@@ -76,12 +77,14 @@ module.exports = function what (a) {
 
         parser.ontext = function(t) {
             var proc = t.trim();
-            if (proc !== "" && proc !== "\n") result.push(proc)
+            if (proc !== "" && proc !== "\n") result.push(proc);
         };
 
         parser.onend = function () {
 
             // If nothing was found, then we have an issue
+            // -------------------------------------------------- //
+
             if (result.length === 0) {
                 nodebot.say("I couldn't find anything, sorry :(");
                 return nodebot.request();
@@ -90,32 +93,34 @@ module.exports = function what (a) {
             nodebot.say("Here's what I found:\n");
 
             var tidbit = [];
-            
-            var width = 80
-            ,   hr    = Array(width).join("-")
-            ;
 
-            console.log(hr);
-            console.log(textAlign(result[0], 80, "center").bold.red);
-            console.log(hr);
-                        
+            format.drawLine();
+            console.log(format.align(result[0], 80).bold.red);
+            format.drawLine();
+
+            console.log("");            
+
             result = result.filter(function(i) { return i.trim() !== ""; });
 
-            result.slice(1, 3).forEach(function(i) {
-
-                tidbit = i.split("|");
-
-                var term = tidbit[0];
-
-                console.log(term.bold.trim() + "\n" + tidbit.slice(1).join(":").trim());
+            result.slice(1, 4).forEach(function(i) {
+                
+                if (i.split("|").length > 1) {
+                    console.log(i.split("|").join(": "));
+                    
+                } else {
+                    var message = "\n" + i.split("\n").join(". ").trim();
+                    console.log(format.clump(message, 76));
+                }
 
             });
 
             var credit = "Courtesy of " + "WolframAlpha" + " (http://www.wolframalpha.com)";
-
-            console.log(hr);
-            console.log(textAlign(credit, 80));
-            console.log(hr);
+            
+            console.log("");
+            
+            format.drawLine();           
+            console.log(format.align(credit, 80));
+            format.drawLine();
 
             return nodebot.request();
             
@@ -126,5 +131,4 @@ module.exports = function what (a) {
 
     });
 
-    return;
 };

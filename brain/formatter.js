@@ -3,7 +3,7 @@
 //
 // Provides some helper functions
 
-module.exports.textAlign = function textAlign(string, width, orientation) {
+module.exports.align = function align (string, width, orientation) {
 
     var spacer = ""
     ,   count  = 0
@@ -32,3 +32,85 @@ module.exports.textAlign = function textAlign(string, width, orientation) {
     }
 
 };
+
+
+
+// Draws a horizontal line, given a length
+// -------------------------------------------------- //
+
+module.exports.drawLine = function drawLine (length) {
+    console.log(Array(length || 80).join("-"));
+}
+
+
+
+// Keeps lines at a specific word count
+// and keeps them in proper left alignment
+// -------------------------------------------------- //
+
+module.exports.clump = function clump (words, limit, lineOffset) {
+    
+    limit      = limit || 80;
+    lineOffset = lineOffset || 0;
+    
+    var clump   = []
+    ,   offset  = ""
+    ,   line    = []
+    ;
+    
+    // Run through a loop of all words
+    words.split(" ").forEach(function(word) {
+        
+        // Get the length of the current line, which is:
+        // the line offset + the current line + the new word
+        var length = lineOffset + line.join(" ").length + word.length
+
+        // Is the length of the new line greater than the limit?
+        if (length <= limit) {
+
+            // no : push the new word into the current line
+            line.push(word.trim());
+
+        } else {
+
+            // yes : push the line in to the clump and reset 
+            // the line
+            clump.push(line.join(" "));
+            line = [word];
+        }
+
+    });
+
+    // This process skips the last line, so let's add it now:
+    clump.push(line.join(" "));
+
+    
+    // Now, create the left margin by compressing an array
+    // into a string
+    offset = new Array(lineOffset).join(" ");
+
+    // Filter whitespace and pull everthing together
+    clump = clump.filter(function(c) { 
+        return c !== "\n" && c !== "";
+    }).join("\n" + offset).slice(0, -1);
+    
+    return clump;
+
+};
+
+
+
+// A whitespace generator
+// Creates a blank Array and stitches it together
+// -------------------------------------------------- //
+
+module.exports.whitespace = function whitespace (length, max) {
+
+    max = max || 12;
+
+    var num   = Math.abs(12 - (length || 0))
+    ,   space = Array(num);
+
+    return space.join(" ");
+
+}

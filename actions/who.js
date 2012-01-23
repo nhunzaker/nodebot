@@ -1,6 +1,7 @@
 // Who
 // -------------------------------------------------- //
 
+var lang = require("../brain/language");
 
 module.exports = function who(a) {
 
@@ -42,19 +43,8 @@ module.exports = function who(a) {
         return this.request();
     }
 
-    nodebot.ask("Hmm... I haven't met " + lang.capitalize(owner) + ". Who are they?", function(text) {
-
-        if (text[0].toLowerCase() === "no") {
-            nodebot.say("Okay, I'll forget about them");
-            return nodebot.request();
-        }
-
-        nodebot.lexicon[owner] = nodebot.lexicon[owner] || {};
-        nodebot.lexicon[owner][key] = text;
-        nodebot.say("Great, now I know who " + lang.capitalize(owner) + " is!");
-
-        return nodebot.request();
-
-    });
+    
+    return nodebot.actions.what.apply(nodebot, [a]);
+    
 
 };

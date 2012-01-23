@@ -131,20 +131,27 @@ var classify = module.exports.classify = function(speech, debug) {
 
     var text   = speech || process.argv.slice(2).join(" ")
     ,   words  = lexer.lex(text)
-    ,   tagged = tagger.tag(words)
+    ,   tagged = []
     ,   action, subject, owner;
 
 
-    if (debug) console.log(tagged);
 
+
+    // PREPROCESSING
+    // -------------------------------------------------- //
 
     // Auto correct for missing punctuation
     if (getType(words.slice(-1)[0]) !== ".") {
         words.push(".");
     }
 
+
     // Classify!
     // -------------------------------------------------- //
+
+    tagged = tagger.tag(words);
+
+    if (debug) console.log(tagged);
 
     var verbs       = getTypes(tagged, "VB")
     ,   nouns       = getTypes(tagged, "NN")
@@ -283,7 +290,7 @@ var classify = module.exports.classify = function(speech, debug) {
 
     else if (owner && preps.length === 0) {
         
-        subject = getBetween(words, ["TO", "DT", "VBP", "PRP$"], ["NN", "RB"], "inside");
+        subject = getBetween(words, ["TO", "DT", "VBP", "PRP$"], ["NN", "RB", "CD"], "inside");
 
         subject = subject.filter(function(s) {
             s = s.toLowerCase();
@@ -291,7 +298,6 @@ var classify = module.exports.classify = function(speech, debug) {
         });
         
         subject = subject.join(" ");
-
     }
 
 

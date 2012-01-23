@@ -1,6 +1,13 @@
 #Nodebot
 
-A helper robot written for the busy developer.
+A helper robot written for the busy developer. Nodebot can (currently):
+
+- Validate html (websites too), css, and javascript 
+- Watch files for changes and validate them there is a supported validator
+- Report system information such as ip addresses, free memory, and host names
+- Query Wolfram|Alpha for definitions and answers to complex questions.
+
+---
 
 ```
 npm install nodebot -g
@@ -28,11 +35,9 @@ Nodebot: What can I help you with?
 Nodebot: Oh snap! I found 1 error in nodebot.js: 
 ----------------------------------
 48:12 - Don't make functions within a loop.
-
-Nodebot: What can I help you with?
- Response:
  
 ```
+
 
 ### General Information
 ```
@@ -56,6 +61,5 @@ Nodebot: What can I help you with?
 
 Nodebot: Nodebot's name is Nodebot
 
-Nodebot: What can I help you with?
- Response: 
- ```
+``` 
+ 

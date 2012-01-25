@@ -8,16 +8,18 @@ var request = require("request")
 ,   fs = require('fs')
 ,   report = require(__dirname + "/reporter");
 
-module.exports.validate = function(file, callback) {
+var validate = module.exports.validate = function(file, callback) {
     
-    var nodebot = this
+    var Nodebot = this
     ,   content = fs.readFileSync(file, "utf-8");
 
     scan(content);
 
 };
 
-module.exports.scan = function scan (string, callback) {
+var scan = module.exports.scan = function scan (string, callback) {
+
+    callback = callback || Nodebot.request;
 
     request({
 
@@ -46,9 +48,9 @@ module.exports.scan = function scan (string, callback) {
             report(errors);
             
         } else if (response.statusCode !== 200) {
-            nodebot.say(("I got a " + response.statusCode + " :(").red.bold);
+            Nodebot.say(("I got a " + response.statusCode + " :(").red.bold);
         } else {
-            nodebot.say("Something went horribly wrong :(".red.bold);
+            Nodebot.say("Something went horribly wrong :(".red.bold);
             console.log(error);
         }
         

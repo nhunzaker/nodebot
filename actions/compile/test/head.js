@@ -1,5 +1,5 @@
 // do something
-//- require cat.js
+//= require cat.js
 
 
 function head () {

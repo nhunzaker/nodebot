@@ -1,9 +1,8 @@
-require("../nodebot");
+require("../../nodebot");
 
-var vows   = require('vows')
-,   assert = require('assert');
-
-var tagger = require("../brain/language/tagger");
+var tagger = require("../../brain/language/tagger"),
+    vows   = require('vows'),
+    assert = require('assert');
 
 // -------------------------------------------------- //
 

@@ -1,9 +1,9 @@
 require("../nodebot");
 
-var vows   = require('vows')
-,   assert = require('assert');
-
-var align = require("../brain/formatter").align;
+var vows   = require('vows'),
+    assert = require('assert'),
+    align  = require("../brain/formatter").align
+;
 
 // -------------------------------------------------- //
 

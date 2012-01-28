@@ -1,1 +1,1 @@
-//- require cat.js
+//= require cat.js

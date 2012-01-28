@@ -305,6 +305,10 @@ var classify = module.exports.classify = function(speech, debug) {
         subject = subject.join(" ");
     }
     
+
+    // POST PROCESSING
+    // -------------------------------------------------- //
+
     // Now let's account for things like keys
     subject = subject ? subject.split("- ").join("-") : undefined;
     owner = owner ? owner.split("- ").join("-") : undefined;
@@ -335,6 +339,15 @@ var classify = module.exports.classify = function(speech, debug) {
         owner = Nodebot.memory.context;
         break;
     }
+
+    // If we somehow got an owner and not a subject,
+    // swap them
+    if (owner && !subject) {
+        subject = owner;
+        owner = undefined;
+    }
+
+
     
     // Return what we find
     // -------------------------------------------------- //

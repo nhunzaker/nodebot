@@ -1,5 +1,5 @@
 // do something
-//- require head.js
+//= require head.js
 
 function eyes () {
 

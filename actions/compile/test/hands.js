@@ -1,5 +1,5 @@
-//- require arms.js
-//- require cat.js
+//= require arms.js
+//= require cat.js
 
 function hands () {
 

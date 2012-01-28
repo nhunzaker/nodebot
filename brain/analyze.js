@@ -1,13 +1,12 @@
 // The A Module
 // -------------------------------------------------- //
 
-var language = require("./language")
-,   tagger = require("./language/tagger")
+var lang = require("./language")
 ,   n = Nodebot;
 
 module.exports = function (data) {
 
-    var a = tagger.classify.apply(n, [data]);
+    var a = lang.classify.apply(n, [data]);
 
     // If there is no action, but the owner is the user or the robot, it
     // is a relabeling
@@ -19,7 +18,7 @@ module.exports = function (data) {
     
     // Now, let's also figure out the best action to take based upon
     // what the nodebot can actually do
-    var action = tagger.closest(a.action, Object.keys(this.actions));
+    var action = lang.closest(a.action, Object.keys(this.actions));
     
     // Unless we are repeating the action, store it for later recollection
     if (action !== "repeat") {

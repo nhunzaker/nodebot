@@ -2,9 +2,10 @@
 // A simple module for uglifying javascripts
 // -------------------------------------------------- //
 
-var jsp = require("uglify-js").parser,
-    pro = require("uglify-js").uglify,
-    fs  = require('fs');
+var jsp      = require("uglify-js").parser,
+    pro      = require("uglify-js").uglify,
+    fs       = require('fs')
+;    
 
 
 // Given an array, move the "from" to "to"
@@ -28,11 +29,11 @@ function sortRequirements (files, directory) {
 
         if (!doc) return false;
         
-        var match = doc.match(/\/\/- require\s\S+(\s+|)/ig),
+        var match = doc.match(/\/\/= require\s\S+(\s+|)/ig),
             matches = [];
 
         match && match.forEach(function(m) {
-            var req = m.replace(/\/\/- require\s/ig, "").trim();
+            var req = m.replace(/\/\/= require\s/ig, "").trim();
             
             matches.push(directory + "/" + req);
         });
@@ -106,7 +107,7 @@ function compressAll (directory, files, filename) {
     files = sortRequirements(stack, directory);
 
     var output = "// Uglified by Nodebot \n//\n// " + new Date().toString()
-            + "\n\/\/" + Array(80).join("-")
+            + "\n\/\/" + Array(60).join("-")
             + "\n\n"
     ;
 

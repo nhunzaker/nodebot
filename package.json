@@ -12,17 +12,15 @@
     "dependencies": {
 
         "colors"            : "*",
-
-        "underscore"        : "*",
         "growl"             : "*",
 
         "request"           : "*",
         "jquery"            : "*",
+
         "jshint"            : "*",
         "csslint"           : "*",
 
         "levenshtein"       : "1.0.0",
-        "natural"           : "*",
         "pos"               : "0.1.1"
         
     },

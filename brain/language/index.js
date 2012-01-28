@@ -1,85 +1,49 @@
 // The Language Module
-// A brute force classifier of the english language
 // -------------------------------------------------- //
 
-var natural       = require('natural')
-,   nounInflector = new natural.NounInflector()
-,   verbInflector = new natural.NounInflector();
+function language () {
 
+    this.classify = require("./tagger").classify;
 
-// -------------------------------------------------- //
+    this.possessify = function (str) {
 
-
-var language = {
-
-    pluralize: function (count, string, type) {
-
-        count  = (typeof count === "number") ? count : count.length;        
-
-        var plural = count.toString()
-        ,   method = (count === 1) ? "singularize" : "pluralize";
-        
-        switch(type) {
-        case "verb":
-            plural += " " + verbInflector[method](string).toString();
-            break;
-        default:
-            plural += " " + nounInflector[method](string).toString();
-        }
-
-        return plural;
-        
-    },
-
-    singularize: function (string, type) {
-
-        switch(type) {
-        case "verb":
-            return verbInflector.singularize(string).toString();
-        default:
-            return nounInflector.singularize(string).toString();
-        }
-        
-    },
-
-    possessify: function (str) {
-
-        if (!language.isPossessive(str) && str !== "") {
-            str = str + (str.split("").slice(-1).toString().toLowerCase() === "s" ? "'" : "'s");
+        if (!this.isPossessive(str) && str !== "") {
+            str = str + (str.slice(-1).toLowerCase() === "s" ? "'" : "'s");
         }
 
         return str;
 
-    },
+    };
 
-    depossessify: function (string) {
+    this.depossessify = function (string) {
 
         var str = string;
 
-        if (language.isPosessive(str)) {
+        if (this.isPossessive(str)) {
             
-            if (!str.search("'s")) {
-                str = str.split("").slice(0, -2).join("");
+            if (str.match("'s")) {
+                str = str.slice(0, -2);
             } else {
-                str = str.split("").slice(0, -1).join("");
+                str = str.slice(0, -1);
             }
             
         }
         
         return str;
-    },
+    };
     
-    isPossessive: function (str) {
-        str = str.split("").splice(-2).join("");
+    this.isPossessive = function (str) {
+        str = str.slice(-2);
         
         return (str === "'s" || str === "s'");
     },
 
-    capitalize: function (string) {
+    this.capitalize = function (string) {
         if (typeof string !== 'string') return string;
-        return string[0].toUpperCase() + string.split("").slice(1).join("");
+        return string[0].toUpperCase() + string.slice(1);
     }
+    
     
 };
 
-module.exports = language;
+module.exports = new language;

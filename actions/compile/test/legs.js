@@ -1,4 +1,4 @@
-//- require cat.js
+//= require cat.js
 
 function legs () {
 

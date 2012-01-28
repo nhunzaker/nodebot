@@ -12,7 +12,7 @@ vows.describe("Lexicon").addBatch({
 
     'It should be able to interpret lexical actions' : {
 
-        topic: tagger.classify("Set wolframalpha to ABC-123", true),
+        topic: tagger.classify("Set wolframalpha to ABC-123"),
 
         "the action should be Set": function(topic) {
             assert.equal(topic.action, "set");

@@ -5,21 +5,25 @@
 // -------------------------------------------------- //
 // Licence: MIT
 // -------------------------------------------------- //
+//-- require application.js
+//-- require nodebot.js
+
 
 require('colors');
+
 // Get the initial action
 var command = process.argv.slice(2).join(" ").trim();
 
 // -------------------------------------------------- //
 
 Nodebot = new(require("events").EventEmitter)();
-
+ 
 // short term memory
 Nodebot.memory  = {
     tasks   : [],
     context : "nodebot"
 };
-
+ 
 // long term memory
 Nodebot.lexicon = require("./brain/lexicon");
 

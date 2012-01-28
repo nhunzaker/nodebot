@@ -13,10 +13,11 @@
 // -------------------------------------------------- //
 
 var lev = require("levenshtein")
-,   pos = require('pos')
+,   pos = require('../pos-js')
 ,   lexer  = new pos.Lexer()
 ,   tagger = new pos.Tagger()
 ,   fileEx = Nodebot.lexicon.file["regular expression"]
+,   dirEx  = /((\.|)\/(.+|))+$/ig
 ;
 
 
@@ -83,18 +84,18 @@ var getBetween = module.exports.getBetween = function(lex, type1, type2, form) {
     var tagged = tagger.tag(lex)
     , filter1 = filter2 = start = end = [];
 
-    form = form || "outside"
+    form = form || "outside";
 
     type1 = (typeof type1 === 'string') ? [type1] : type1;
     type2 = (typeof type2 === 'string') ? [type2] : type2;
 
-    filter1 =  tagged.filter(function(i) { return type1.indexOf(i[1]) !== -1 }) || [];
-    filter2 =  tagged.filter(function(i) { return type2.indexOf(i[1]) !== -1  }) || [];
+    filter1 =  tagged.filter(function(i) { return type1.indexOf(i[1]) !== -1; }) || [];
+    filter2 =  tagged.filter(function(i) { return type2.indexOf(i[1]) !== -1;  }) || [];
     
     if (form === "outside") {
-        start = (filter1[0]) ? filter1[0][0] : undefined
+        start = (filter1[0]) ? filter1[0][0] : undefined;
     } else {
-        start = (filter1.slice(-1)[0]) ? filter1.slice(-1)[0][0] : undefined
+        start = (filter1.slice(-1)[0]) ? filter1.slice(-1)[0][0] : undefined;
     }
 
     end = (filter2.slice(-1)[0]) ? filter2.slice(-1)[0][0] : undefined;
@@ -109,7 +110,7 @@ var getTypes = module.exports.getTypes = function (array, string, strict) {
 
     // Is the array lexical?
     if (typeof array[0] !== 'object') {
-        array = tagger.tag(array)
+        array = tagger.tag(array);
     }
 
     var type = array.filter(function(word) {
@@ -135,8 +136,6 @@ var classify = module.exports.classify = function(speech, debug) {
     ,   action, subject, owner;
 
 
-
-
     // PREPROCESSING
     // -------------------------------------------------- //
 
@@ -144,13 +143,14 @@ var classify = module.exports.classify = function(speech, debug) {
     if (getType(words.slice(-1)[0]) !== ".") {
         words.push(".");
     }
-
+    
 
     // Classify!
     // -------------------------------------------------- //
 
     tagged = tagger.tag(words);
-
+    
+    if (debug) console.log(words);
     if (debug) console.log(tagged);
 
     var verbs       = getTypes(tagged, "VB")
@@ -179,7 +179,14 @@ var classify = module.exports.classify = function(speech, debug) {
     // the first verb
     else if (getTypes(tagged, "VB", true).length > 0) {
         action = getTypes(tagged, "VB", true)[0];
-    } 
+    }
+    
+    // If there are nouns and prepositions then the action
+    // is the first noun
+    // ex: Repeat that last action
+    else if (nouns.length > 0 && preps.length > 0) {
+        action = nouns[0];
+    }
 
     // Are there at least any adjectives that might work?
     else if (adjectives.length > 0) {
@@ -219,10 +226,10 @@ var classify = module.exports.classify = function(speech, debug) {
     // determiners/nouns
     else if (determiners.length > 0 && preps.length > 0) {
 
-        owner = getBetween(words, ["IN"], ["DT", "NN", "."]);
-        
-        // Strip punctuation
-        owner = stripTypes(owner, ".").join(" ");
+        var prepIndex = words.indexOf(preps[0]),
+            detIndex = words.indexOf(determiners[0]);
+
+        owner = words.slice(prepIndex + 1, -1, detIndex).join(" ");
     }
 
     // Hmm, now let's try between the action and the word "to"
@@ -249,26 +256,24 @@ var classify = module.exports.classify = function(speech, debug) {
     // SUBJECT
     // Answers : "What is this statement about?"
     // -------------------------------------------------- //
-
-    // If there is a file within the statement, it's probably
-    // the subject
-    if (speech.match(fileEx) !== null) {
-        
-        // Mainly this is to address
-        // "Convert file.x to format
-        if (to.length > 0) {
-            subject = getBetween(words, "TO", ["NN", "VB"]).join();
-        } else {
-            subject = speech.match(fileEx)[0].trim();
-        }
-
+    
+    if (getType(words[0]) === "VBZ" && words.indexOf(action) === words.length - 2) {
+        subject = words.slice(1, -2).join(" ").trim();
     }
 
+    else if (determiners.length === 0 && preps.length === 0 && getType(action) === "VB") {
+        subject = words.slice(1, -1).join(" ");
+    }
+    
     // If ownership and there are prepositions, scan for words bteween
     // determinates and posessive words, and prepositions
     else if (preps.length > 0) {
-        
-        subject = getBetween(words, ["DT", "PRP$"], ["IN"]);
+
+        if (preps.length > 1 || determiners.length > 0) {
+            subject = getBetween(words, ["DT", "PRP$"], ["IN"]);
+        } else {
+            subject = getBetween(words, ["IN"], ["."]);
+        }
 
         // Strip punctuaction, prepositions, and owners
         subject = stripTypes(subject, [".", "IN"]).join(" ");
@@ -278,7 +283,7 @@ var classify = module.exports.classify = function(speech, debug) {
     // Helps with "How much memory do I have?"
     else if (owner === "I" && getType(words[words.indexOf(owner) + 1]) === "VBP") {
 
-        var answer = words.slice(0, words.indexOf(owner));
+        answer = words.slice(0, words.indexOf(owner));
 
         subject = getBetween(answer, ["JJ"], ["VBP"]).slice(0, -1).join(" ");
 
@@ -289,7 +294,7 @@ var classify = module.exports.classify = function(speech, debug) {
     // (*phew...*)
 
     else if (owner && preps.length === 0) {
-        
+
         subject = getBetween(words, ["TO", "DT", "VBP", "PRP$"], ["NN", "RB", "CD"], "inside");
 
         subject = subject.filter(function(s) {
@@ -299,16 +304,18 @@ var classify = module.exports.classify = function(speech, debug) {
         
         subject = subject.join(" ");
     }
+    
+    // Now let's account for things like keys
+    subject = subject ? subject.split("- ").join("-") : undefined;
+    owner = owner ? owner.split("- ").join("-") : undefined;
 
-
-    // Let's check to make sure we properly treat file names
-    if (owner && fileEx.test(owner.split(" ").join("")))   owner = owner.split(" ").join("");
-    if (subject && fileEx.test(subject.split(" ").join(""))) subject = subject.split(" ").join("");
+    // Clean directory subjects/owners
+    subject = (subject && subject.replace(/\s/ig, "").match(dirEx)) ? subject.replace(/\s/ig, "") : subject;
+    owner = (owner && owner.replace(/\s/ig, "").match(dirEx)) ? owner.replace(/\s/ig, "") : owner;
 
     
     // Now that everything is properly classified,
     // let's filter the ownership
-
     switch(owner) {
         
         // Reverse user possession
@@ -329,7 +336,6 @@ var classify = module.exports.classify = function(speech, debug) {
         break;
     }
     
-
     // Return what we find
     // -------------------------------------------------- //
 

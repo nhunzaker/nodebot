@@ -428,6 +428,24 @@ vows.describe('Decipher speech').addBatch({
             assert.equal(topic.subject, "fly");
         }
 
+    },
+
+    'When asked, "Repeat that last statement"': {
+
+        topic: tagger.classify("Repeat that last statement", true),
+        
+        'the action should be "repeat"': function (topic) {
+            assert.equal(topic.action, "repeat");
+        },
+
+        'there should be no object': function (topic) {
+            assert.equal(topic.owner, undefined);
+        },
+
+        'the subject should be last statement': function (topic) {
+            assert.equal(topic.subject, "last statement");
+        }
+
     }
 
 

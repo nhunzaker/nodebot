@@ -63,7 +63,7 @@ module.exports.clump = function clump (words, limit, lineOffset) {
         
         // Get the length of the current line, which is:
         // the line offset + the current line + the new word
-        var length = lineOffset + line.join(" ").length + word.length
+        var length = lineOffset + line.join(" ").length + word.length;
 
         // Is the length of the new line greater than the limit?
         if (length <= limit) {

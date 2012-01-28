@@ -3,7 +3,7 @@ require("../nodebot");
 var vows   = require('vows')
 ,   assert = require('assert');
 
-var textAlign = require("../brain/formatter").textAlign;
+var align = require("../brain/formatter").align;
 
 // -------------------------------------------------- //
 
@@ -14,7 +14,7 @@ vows.describe("Text Formatting").addBatch({
 
         "left orientation should work": function() {
             
-            var orientation = textAlign("foobar", 10, "left");
+            var orientation = align("foobar", 10, "left");
             
             assert.equal(orientation, "foobar    ");
             assert.equal(orientation.length, 10);
@@ -22,7 +22,7 @@ vows.describe("Text Formatting").addBatch({
 
         "center orientation should work": function() {
 
-            var orientation = textAlign("foobar", 10, "center");
+            var orientation = align("foobar", 10, "center");
 
             assert.equal(orientation, "  foobar  ");
             assert.equal(orientation.length, 10);
@@ -30,7 +30,7 @@ vows.describe("Text Formatting").addBatch({
 
         "right orientation should work": function() {
 
-            var orientation = textAlign("foobar", 10, "right");
+            var orientation = align("foobar", 10, "right");
 
             assert.equal(orientation, "    foobar");
             assert.equal(orientation.length, 10);

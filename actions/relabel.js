@@ -1,14 +1,17 @@
 // Relabel
 // -------------------------------------------------- //
 
+var lang = require("../brain/language");
 
 module.exports = function relabel (a) {
     
     var nodebot     = this
-    ,   ownership   = a.ownership
+    ,   ownership   = a.owner
     ,   subject     = a.subject
     ,   description = lang.capitalize(a.description)
     ;
+
+    console.log(a);
 
     if (ownership === subject) {
         subject = "definition";

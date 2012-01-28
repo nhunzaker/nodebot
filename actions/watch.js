@@ -27,7 +27,6 @@ module.exports = function watch (a) {
     try {
         stat = fs.statSync(file);
     } catch (err) {
-        console.log(err);
         nodebot.say("I couldn't find that file, does it exist?");
         return nodebot.request();
     }

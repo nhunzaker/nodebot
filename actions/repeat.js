@@ -1,12 +1,12 @@
 // Repeat actions
 // -------------------------------------------------- //
 
-actions.repeat = function() {
+module.exports = function repeat () {
     
     var action = "";
     
     if (this.memory.tasks === []) {
-        this.say("I haven't done anything yet, silly!");
+        this.say("I haven't done anything yet.");
         return this.request();
     } else {
         action = this.memory.tasks.slice(-1).toString();

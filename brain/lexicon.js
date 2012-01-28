@@ -109,17 +109,32 @@ module.exports = lexicon = {
 
     "javascript": {
         definition           : "The language of the internet",
-        "regular expression" : /\.js/
+        "regular expression" : /\.js$/,
+        mime                 : ".js"
     },
 
     "css": {
         definition           : "The great beautifier of the internet",
-        "regular expression" : /\.css/
+        "regular expression" : /\.css$/,
+        mime                 : ".css"     
+    },
+
+    "sass": {
+        definition           : "Syntaxually awesome stylesheets",
+        "regular expression" : /\.sass$/,
+        mime                 : ".sass"     
+    },
+
+    "scss": {
+        definition           : "Syntaxually awesome stylesheets",
+        "regular expression" : /\.scss$/,
+        mime                 : ".scss"     
     },
 
     "html": {
         definition           : "The great information organizer of the internet",
-        "regular expression" : /\.html/
+        "regular expression" : /\.html$/,
+        mime                 : ".html"     
     }
     
 };

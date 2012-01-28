@@ -23,6 +23,9 @@ module.exports = function add_interaction_module(context) {
     };
 
     nodebot.request = function() {
+
+        if (arguments) nodebot.say.apply(nodebot, arguments);
+
         var statement = "What can I help you with?";        
         nodebot.ask(statement, function(command) {
             nodebot.analyze(command);

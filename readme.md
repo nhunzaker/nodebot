@@ -2,6 +2,7 @@
 
 A helper robot written for the busy developer. Nodebot can (currently):
 
+- Compile javascripts using Uglify.js (And all javascripts in a directory)
 - Validate html (websites too), css, and javascript 
 - Watch files for changes and validate them there is a supported validator
 - Report system information such as ip addresses, free memory, and host names
@@ -59,4 +60,14 @@ Nodebot: What can I help you with?
 Nodebot: Nodebot's name is Nodebot
 
 ``` 
+
+### Compiling javascript
+
+```
+$ nodebot compile all javascript as min.js
+
+Nodebot: I am now compiling all javascript into min.js
+
+Nodebot: Files have changed. Compiling all javascript into min.js.
+```
  

@@ -1,0 +1,33 @@
+// Variables
+// ================================================== //
+
+
+// Grid
+// -------------------------------------------------- //
+
+$grid-column-width    : 40px;
+$grid-gutter-width    : 20px;
+$grid-total-columns   : 16;
+$grid-baseline-height : 20px;
+
+$grid-offset          : ($grid-column-width + $grid-gutter-width);
+$grid-width           : ($grid-offset * $grid-total-columns);
+
+
+// Grid Utility
+// -------------------------------------------------- //
+
+$grid-background-column-width   : $grid-column-width;
+$grid-background-gutter-width   : $grid-gutter-width;
+$grid-background-total-columns  : $grid-total-columns;
+$grid-background-baseline-height: $grid-baseline-height;
+
+$grid-background-baseline-color : rgba(0,0,0,0.15);
+$grid-background-column-color   : rgba(100, 100, 100, 0.05);
+
+
+// Typography
+// -------------------------------------------------- //
+
+$sans-serif : "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$serif      : "Georgia", "Times New Roman", Helvetica, Arial, sans-serif;

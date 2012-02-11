@@ -17,7 +17,7 @@ var lex    = Nodebot.lexicon,
 // -------------------------------------------------- //
 
 function compressor (directory, filetype, filename) {
-    
+
     var filter     = Nodebot.lexicon[filetype]["regular expression"],
         newFile    = filename || filetype + ".min" + lex[filetype].mime,
         compress   = require("./" + filetype);
@@ -27,12 +27,15 @@ function compressor (directory, filetype, filename) {
         if (err) return false;
 
         files = files.map(function(f) {
-            return directory + "/" + f;
+            if (filename && f === filename) {
+            } else {
+                return directory + "/" + f;
+            }
         });
 
         var compressed = compress.all(directory, files, filename);
         
-        return fs.writeFile(directory + "/" + newFile, compressed);
+        return fs.writeFile(directory + "/" + newFile.trim(), compressed);
 
     });
 

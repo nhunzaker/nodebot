@@ -1,49 +1,48 @@
 // The Language Module
 // -------------------------------------------------- //
 
-function language () {
+var speak = require("speakeasy-nlp");
+var lang = {};
 
-    this.classify = require("./tagger").classify;
+lang.classify = speak.classify;
+lang.closest  = speak.closest;
 
-    this.possessify = function (str) {
+lang.possessify = function (str) {
 
-        if (!this.isPossessive(str) && str !== "") {
-            str = str + (str.slice(-1).toLowerCase() === "s" ? "'" : "'s");
-        }
-
-        return str;
-
-    };
-
-    this.depossessify = function (string) {
-
-        var str = string;
-
-        if (this.isPossessive(str)) {
-            
-            if (str.match("'s")) {
-                str = str.slice(0, -2);
-            } else {
-                str = str.slice(0, -1);
-            }
-            
-        }
-        
-        return str;
-    };
-    
-    this.isPossessive = function (str) {
-        str = str.slice(-2);
-        
-        return (str === "'s" || str === "s'");
-    },
-
-    this.capitalize = function (string) {
-        if (typeof string !== 'string') return string;
-        return string[0].toUpperCase() + string.slice(1);
+    if (!lang.isPossessive(str) && str !== "") {
+        str = str + (str.slice(-1).toLowerCase() === "s" ? "'" : "'s");
     }
-    
-    
+
+    return str;
+
 };
 
-module.exports = new language;
+lang.depossessify = function (string) {
+
+    var str = string;
+
+    if (lang.isPossessive(str)) {
+        
+        if (str.match("'s")) {
+            str = str.slice(0, -2);
+        } else {
+            str = str.slice(0, -1);
+        }
+        
+    }
+    
+    return str;
+};
+
+lang.isPossessive = function (str) {
+    str = str.slice(-2);
+    
+    return (str === "'s" || str === "s'");
+};
+
+lang.capitalize = function (string) {
+    if (typeof string !== 'string') return string;
+    return string[0].toUpperCase() + string.slice(1);
+};
+
+module.exports = lang;

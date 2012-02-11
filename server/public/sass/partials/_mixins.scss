@@ -1,0 +1,40 @@
+// Mixins
+// ================================================== //
+
+
+// Grid Mixins
+// -------------------------------------------------- //
+
+@mixin alpha {
+    margin-left: 0;
+}
+
+@mixin omega {
+    margin-right: 0;
+}
+
+@mixin grid ($count:1, $pos:"") {
+
+    $gutter : $grid-gutter-width;
+    $base   : $grid-column-width * $count;
+
+    width: $base + (($count - 1) * $gutter);
+    
+    float: left; 
+    display: inline; 
+    
+    margin: 0 ($gutter / 2) $grid-baseline-height ($gutter / 2);
+
+    @if ($pos == "alpha") {
+        @include alpha();
+    }
+
+    @if ($pos == "omega") {
+        @include omega();
+    }
+    
+}
+
+@mixin offset ($cols:1) {
+    padding-left: ($cols * $grid-offset) + 0px;
+}

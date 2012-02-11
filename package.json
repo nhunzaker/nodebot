@@ -1,32 +1,30 @@
 {
-    "name": "nodebot",
-    "description": "An artificial intelligence written for NodeJS",
-    "version": "0.1.61",
+  "name": "nodebot",
+  "description": "An artificial intelligence written for NodeJS",
+  "version": "0.1.63",
 
-    "homepage": "",
+  "homepage": "",
 
-    "engines": {
-        "node": ">=0.6.4"
-    },
+  "engines": {
+    "node": ">=0.6.4"
+  },
 
-    "dependencies": {
+  "dependencies": {
 
-        "colors"            : "*",
-        "growl"             : "*",
+    "csslint"           : "*",
+    "colors"            : "*",
+    "growl"             : "*",
+    "jquery"            : "*",
+    "jshint"            : "*",
+    "request"           : "*",
+    "speakeasy-nlp"     : "*",
+    "flatiron"          : "*",
+    "connect"           : "*",
+    "socket.io"         : "*"
+  },
 
-        "request"           : "*",
-        "jquery"            : "*",
+  "author": "Nate Hunzaker",
 
-        "jshint"            : "*",
-        "csslint"           : "*",
-
-        "levenshtein"       : "1.0.0",
-        "pos"               : "0.1.1"
-        
-    },
-
-    "author": "Nate Hunzaker",
-
-    "main": "./nodebot.js",
-    "bin" : { "nodebot": "./bin/nodebot" }
+  "main": "./nodebot.js",
+  "bin" : { "nodebot": "./bin/nodebot" }
 }

@@ -1,0 +1,56 @@
+
+// #Buttons
+// ================================================== //
+
+$color-stops: color-stops( rgba(255,255,255,.2), rgba(0,0,0, 0.2));
+$hover-stops: color-stops( rgba(255,255,255,.3), rgba(0,0,0, 0.3));
+$active-stops: color-stops( rgba(255,255,255, 0.35), rgba(10,10,10, 0.4));
+
+// ================================================== //
+
+
+.button, button, input[type="submit"], input[type="reset"], input[type="button"] {
+
+		background: #eee; /* Old browsers */
+	  border: 1px solid #aaa;
+    border-color: #ccc #ccc #aaa #ccc;
+	  color: #444;
+	  cursor: pointer;
+	  font: bold 11px/normal $sans-serif;
+	  margin-bottom: 20px;
+	  text-decoration: none;
+	  text-shadow: 0 1px rgba(255, 255, 255, .75);
+	  padding: 8px 10px;
+
+    @include inline-block;
+    @include background( linear-gradient( $color-stops ), #eee );
+    @include border-radius(3px);
+    
+    &:hover {
+	      color: #222;
+		    background: #ddd; /* Old browsers */
+        @include background( linear-gradient( $hover-stops ), #222 );
+	      border: 1px solid #888;
+	      border-color: #aaa #888 #888 #aaa;
+    }
+
+    &:active {
+		    background: #ccc; /* Old browsers */
+	      border: 1px solid #666;
+        @include background( linear-gradient( $active-stops ), #ccc );
+    }
+    
+    &.full-width {
+		    padding-left: 0 !important;
+		    padding-right: 0 !important;
+		    text-align: center;
+	      width: 100%;
+    }
+}
+
+/* Fix for odd Mozilla border & padding issues */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}

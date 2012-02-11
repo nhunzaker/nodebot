@@ -17,13 +17,13 @@ var command = process.argv.slice(2).join(" ").trim();
 // -------------------------------------------------- //
 
 Nodebot = new(require("events").EventEmitter)();
- 
+
 // short term memory
 Nodebot.memory  = {
     tasks   : [],
     context : "nodebot"
 };
- 
+
 // long term memory
 Nodebot.lexicon = require("./brain/lexicon");
 
@@ -41,8 +41,14 @@ require("./brain/interaction")(Nodebot);
 
 // -------------------------------------------------- //
 
-Nodebot.boot = function() {
-    (command !== "") ? Nodebot.analyze(command) : Nodebot.request();
+Nodebot.boot = function(server) {
+
+    if (server) {
+        var app = require("./server");
+    } else {
+        (command !== "") ? Nodebot.analyze(command) : Nodebot.request();
+    }
+
 };
 
 // Take the proper initial action
@@ -53,6 +59,5 @@ if (!module.parent) {
         console.log("");
     });
 
-    Nodebot.boot();
-
+    Nodebot.boot(command === "-s");
 }

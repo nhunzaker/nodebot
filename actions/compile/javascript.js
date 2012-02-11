@@ -7,7 +7,6 @@ var jsp      = require("uglify-js").parser,
     fs       = require('fs')
 ;    
 
-
 // Given an array, move the "from" to "to"
 // -------------------------------------------------- //
 
@@ -48,20 +47,20 @@ function sortRequirements (files, directory) {
 
     // For each file we output
     output.forEach(function(a, indexParent) {
-        
+
         // Check each file for possible requirements
         output.forEach(function(b, indexChild) {
             
             // Yes? move the required child before the parent
             if (a.requirements.indexOf(b.filename) > -1) {
-                move(output, indexChild, indexParent);
+                move(output, indexChild, indexParent - 1);
             }
 
         });
 
     });
 
-    return output.reverse();
+    return output;
 }
 
 
@@ -94,13 +93,13 @@ function compressAll (directory, files, filename) {
     // Filter down to only the non-hidden files of the type
     // And not the filtered file we'll create
 
-    files.filter(function(filename) {
-        return filter.test(filename) && filename !== newFile;
-    }).forEach(function(filename) {
+    files.filter(function(f) {
+        return f !== filename && filter.test(f);
+    }).forEach(function(f) {
         try {
-            stack.push([filename, fs.readFileSync(filename).toString()]);
+            stack.push([f, fs.readFileSync(f).toString()]);
         } catch (x) {
-            console.log("Could not read file %s", filename);
+            console.log("Could not read file %s", f);
         }
     });
 
@@ -108,11 +107,11 @@ function compressAll (directory, files, filename) {
 
     var output = "// Uglified by Nodebot \n//\n// " + new Date().toString()
             + "\n\/\/" + Array(60).join("-")
-            + "\n\n"
+            + "\n\n;"
     ;
 
     files.forEach(function(f) {
-        output += compress(f.filename, f.content);
+        output += compress(f.filename, f.content) + ";";
     });
 
     return output;

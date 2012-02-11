@@ -1,7 +1,8 @@
 // The Analysis Module
 // -------------------------------------------------- //
 
-var growl = require('growl');
+var growl = require('growl'),
+    util  = require("util");
 
 module.exports = function add_interaction_module(context) {
 
@@ -33,8 +34,10 @@ module.exports = function add_interaction_module(context) {
     };
 
     nodebot.say = function() {
-        arguments[0] = "\n" + nodebot.lexicon.nodebot.name.magenta.bold + ": " + arguments[0];
-        console.log.apply(nodebot, arguments);
+
+        var message = util.format.apply(null, arguments);
+        console.log(nodebot.lexicon.nodebot.name.magenta.bold + ": " + message);
+        nodebot.io && nodebot.io.sockets.emit('output', message);
 
         return this;
     };

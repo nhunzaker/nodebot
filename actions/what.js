@@ -98,23 +98,28 @@ module.exports = function what (a) {
             console.log(format.align(result[0], 80).bold.red);
             format.drawLine();
 
-            console.log("");            
+            console.log("");
+
+            var message = "";
 
             result = result.filter(function(i) { return i.trim() !== ""; });
 
             result.slice(1, 4).forEach(function(i) {
                 
                 if (i.split("|").length > 1) {
-                    console.log(format.clump(i.split("|").join(": ")));
+                    message += "\n" + format.clump(i.split("|").join(": "));
                     
                 } else {
-                    var message = i.split("\n").join(". ").trim();
-                    console.log("\n" + format.clump(message, 76));
+                    var tmp = i.split("\n").join(". ").trim();
+                    message += "\n\n" + format.clump(tmp, 76);
                 }
 
             });
 
             var credit = "Courtesy of " + "WolframAlpha" + " (http://www.wolframalpha.com)";
+
+            nodebot.io && nodebot.io.sockets.emit('output', message);
+            nodebot.io && nodebot.io.sockets.emit('output', credit);
             
             console.log("");
             

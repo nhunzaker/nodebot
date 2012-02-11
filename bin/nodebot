@@ -2,4 +2,4 @@
 
 require("../nodebot.js");
 
-Nodebot.boot();
+Nodebot.boot(process.argv[2] === "-s");

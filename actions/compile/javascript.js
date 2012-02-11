@@ -76,7 +76,7 @@ function compress (filename, content) {
 
     // Add the records
     ret += "\/\/ " + filename;
-    ret += "\n" + pro.gen_code(content) + "\n\n";
+    ret += "\n" + pro.gen_code(content) + ";\n\n";
 
     return ret;
 
@@ -111,7 +111,7 @@ function compressAll (directory, files, filename) {
     ;
 
     files.forEach(function(f) {
-        output += compress(f.filename, f.content) + ";";
+        output += compress(f.filename, f.content);
     });
 
     return output;

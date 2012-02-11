@@ -36,8 +36,12 @@ module.exports = function add_interaction_module(context) {
     nodebot.say = function() {
 
         var message = util.format.apply(null, arguments);
-        console.log(nodebot.lexicon.nodebot.name.magenta.bold + ": " + message);
-        nodebot.io && nodebot.io.sockets.emit('output', message);
+
+        if (nodebot.io) {
+            nodebot.io.sockets.emit('output', message);
+        } else {
+            console.log(nodebot.lexicon.nodebot.name.magenta.bold + ": " + message);
+        }
 
         return this;
     };

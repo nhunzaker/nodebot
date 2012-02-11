@@ -10,6 +10,8 @@ $(document).ready(function() {
     $("form").submit(function(e) {
         e.preventDefault();
         socket.emit("input", $("#question").val());
+        
+        $("#question").val("").focus();
     });
 
 });

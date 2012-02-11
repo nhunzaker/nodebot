@@ -20,7 +20,9 @@
     "speakeasy-nlp"     : "*",
     "flatiron"          : "*",
     "connect"           : "*",
-    "socket.io"         : "*"
+    "socket.io"         : "*",
+    "union"             : "*",
+    "plates"            : "*"
   },
 
   "author": "Nate Hunzaker",

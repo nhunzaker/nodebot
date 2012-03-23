@@ -1,0 +1,56 @@
+
+
+body {
+    background: #333 url("/images/dark_dotted.png");
+    padding-top: 60px;
+}
+
+section {
+    background:#d9d9d9 url("/images/brushed_alu.png");
+    margin: 0 auto;
+    padding: 10px;
+    width: 45%;
+
+    @include border-radius(3px);
+    
+    header {
+        text-align: center;
+    }
+}
+
+p {
+    margin: 1em 0;
+}
+
+#feed {
+    background: #222;
+    border: 1px solid #111;
+    border-bottom: 0;
+    color: #fff;
+    height: 400px;
+    margin-top: 20px;
+    overflow-y: scroll;
+
+    padding: 1% 2%;
+    width: 96%;
+
+    @include box-shadow(inset 0 1px 3px rgba(0,0,0,0.45), 0 1px 1px rgba(255,255,255,0.75));
+    @include border-top-radius(3px);
+    strong {
+        color: #f0f0f0;
+    }
+    
+}
+
+input[type="text"] {
+    background: #111;
+    border-color: transparent #111 #000;
+    color: #fff;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    width: 98.5%;
+    
+    @include border-top-radius(0);
+
+}

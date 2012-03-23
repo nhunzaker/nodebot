@@ -9,6 +9,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  * 8/17/2011
  */
+@import url(http://fonts.googleapis.com/css?family=VT323);
 /* line 4, ../sass/partials/_reset.scss */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
@@ -65,7 +66,7 @@ body {
 /* line 16, ../sass/partials/_base_type.scss */
 h1, h2, h3, h4, h5, h6 {
   color: #181818;
-  font-family: "Georgia", "Times New Roman", Helvetica, Arial, sans-serif;
+  font-family: "VT323", sans-serif;
   font-weight: normal;
 }
 /* line 21, ../sass/partials/_base_type.scss */
@@ -307,7 +308,7 @@ img {
   -khtml-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 7, ../../../.rvm/gems/ruby-1.9.2-p290/gems/compass-0.11.7/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
+/* line 7, ../../../../../.rvm/gems/ruby-1.9.2-p290/gems/compass-0.11.7/frameworks/compass/stylesheets/compass/css3/_inline-block.scss */
 .button, button, input[type="submit"], input[type="reset"], input[type="button"] {
   *display: inline;
 }
@@ -1107,49 +1108,87 @@ label span, legend span {
   height: 0;
 }
 
-/*
-* Skeleton V1.1
-* Copyright 2011, Dave Gamache
-* www.getskeleton.com
-* Free to use under the MIT license.
-* http://www.opensource.org/licenses/mit-license.php
-* 8/17/2011
-*/
-/* Table of Content
-==================================================
-	#Site Styles
-	#Page Styles
-	#Media Queries
-	#Font-Face */
-/* #Site Styles
-================================================== */
-/* #Page Styles
-================================================== */
-/* line 23, ../sass/_layout.scss */
-.container {
-  padding-top: 1.5em;
+/* line 3, ../sass/partials/_custom.scss */
+body {
+  background: #333333 url("/images/dark_dotted.png");
+  padding-top: 60px;
 }
 
-/* #Media Queries
-================================================== */
-/* Smaller than standard 960 (devices and browsers) */
-/* Tablet Portrait size to standard 960 (devices and browsers) */
-/* All Mobile Sizes (devices and browser) */
-/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
-/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
-/* #Font-Face
-================================================== */
-/* 	This is the proper syntax for an @font-face file
-		Just create a "fonts" folder at the root,
-		copy your FontName into code below and remove
-		comment brackets */
-/*	@font-face {
-	    font-family: 'FontName';
-	    src: url('../fonts/FontName.eot');
-	    src: url('../fonts/FontName.eot?iefix') format('eot'),
-	         url('../fonts/FontName.woff') format('woff'),
-	         url('../fonts/FontName.ttf') format('truetype'),
-	         url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
-	    font-weight: normal;
-	    font-style: normal; }
-*/
+/* line 8, ../sass/partials/_custom.scss */
+section {
+  background: #d9d9d9 url("/images/brushed_alu.png");
+  margin: 0 auto;
+  padding: 10px;
+  width: 45%;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+}
+/* line 16, ../sass/partials/_custom.scss */
+section header {
+  text-align: center;
+}
+
+/* line 21, ../sass/partials/_custom.scss */
+p {
+  margin: 1em 0;
+}
+
+/* line 25, ../sass/partials/_custom.scss */
+#feed {
+  background: #222;
+  border: 1px solid #111;
+  border-bottom: 0;
+  color: #fff;
+  height: 400px;
+  margin-top: 20px;
+  overflow-y: scroll;
+  padding: 1% 2%;
+  width: 96%;
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 1px rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 1px rgba(255, 255, 255, 0.75);
+  -o-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 1px rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.45), 0 1px 1px rgba(255, 255, 255, 0.75);
+  -moz-border-radius-topleft: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -o-border-top-left-radius: 3px;
+  -ms-border-top-left-radius: 3px;
+  -khtml-border-top-left-radius: 3px;
+  border-top-left-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -o-border-top-right-radius: 3px;
+  -ms-border-top-right-radius: 3px;
+  -khtml-border-top-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+/* line 39, ../sass/partials/_custom.scss */
+#feed strong {
+  color: #f0f0f0;
+}
+
+/* line 45, ../sass/partials/_custom.scss */
+input[type="text"] {
+  background: #111;
+  border-color: transparent #111 #000;
+  color: #fff;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  width: 98.5%;
+  -moz-border-radius-topleft: 0;
+  -webkit-border-top-left-radius: 0;
+  -o-border-top-left-radius: 0;
+  -ms-border-top-left-radius: 0;
+  -khtml-border-top-left-radius: 0;
+  border-top-left-radius: 0;
+  -moz-border-radius-topright: 0;
+  -webkit-border-top-right-radius: 0;
+  -o-border-top-right-radius: 0;
+  -ms-border-top-right-radius: 0;
+  -khtml-border-top-right-radius: 0;
+  border-top-right-radius: 0;
+}

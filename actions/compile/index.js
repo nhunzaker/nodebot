@@ -32,10 +32,13 @@ function compressor (directory, filetype, filename) {
                 return directory + "/" + f;
             }
         });
-
-        var compressed = compress.all(directory, files, filename);
         
-        return fs.writeFile(directory + "/" + newFile.trim(), compressed);
+        try {
+            var compressed = compress.all(directory, files, filename);
+            return fs.writeFile(directory + "/" + newFile.trim(), compressed);
+        } catch (x) {
+            return false;
+        }
 
     });
 
@@ -72,21 +75,21 @@ module.exports = function compile (a) {
         
         // Yes, watch the target
         fs.watch(target, { persistent: true, interval: 1000 }, function () {
-            nodebot.say("Files have changed. Compiling all %s in %s.", filetype.blue.bold, target.blue);
+            nodebot.say("Files have changed. Compiling all %s in %s.", filetype, target);
             compressor(target, filetype);
         });
         compressor(target, filetype);
-        nodebot.say("I am now compiling all %s in %s", filetype.blue.bold, target.blue);
+        nodebot.say("I am now compiling all %s in %s", filetype, target);
 
     } else {
         
         // No, use the current directory
         fs.watch(process.cwd(), { persistent: true, interval: 1000 }, function () {
-            nodebot.say("Files have changed. Compiling all %s into %s.", filetype.blue.bold, target.blue);
+            nodebot.say("Files have changed. Compiling all %s into %s.", filetype, target);
             compressor(process.cwd(), filetype, target);
         });
 
-        nodebot.say("I am now compiling all %s into %s", filetype.blue.bold, target.blue);
+        nodebot.say("I am now compiling all %s into %s", filetype, target);
         compressor(process.cwd(), filetype, target);
     }
     
@@ -98,7 +101,7 @@ module.exports = function compile (a) {
     // Make it so that when the user exits watching, it loads
     // up another prompt
     process.once('SIGINT', function () {
-        nodebot.request("Okay, I am no longer compiling %s files.", filetype.bold.blue, target.blue);
+        nodebot.request("Okay, I am no longer compiling %s files.", filetype, target);
     });
     
 };

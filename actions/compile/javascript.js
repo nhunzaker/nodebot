@@ -98,9 +98,7 @@ function compressAll (directory, files, filename) {
     }).forEach(function(f) {
         try {
             stack.push([f, fs.readFileSync(f).toString()]);
-        } catch (x) {
-            console.log("Could not read file %s", f);
-        }
+        } catch (x) {}
     });
 
     files = sortRequirements(stack, directory);

@@ -19,6 +19,10 @@ app.log.info("Nodebot is listening on port", port);
 // Install socket.io
 Nodebot.io = require('socket.io').listen(app.server);
 
+Nodebot.io.configure(function() {
+    Nodebot.io.set('log level', 0);
+});
+
 Nodebot.io.sockets.on('connection', function(socket) {
     socket.emit('output', "Hello, master");
     socket.on("input", function(d) {

@@ -10,6 +10,8 @@
  * 8/17/2011
  */
 
+@import url(http://fonts.googleapis.com/css?family=VT323);
+
 @import "compass/css3";
 @import "compass/layout";
 
@@ -51,4 +53,4 @@
 // User Styles
 // ================================================== //
 
-@import "layout";
+@import "partials/custom";

@@ -1,9 +1,15 @@
 $(document).ready(function() {
 
-    var socket = io.connect('http://localhost');
+    var socket = io.connect(window.location.origin),
+        $feed  = $("#feed");
     
     socket.on("output", function (data) {
-        $("<p/>").html("<strong>Nodebot:</strong> " + data).prependTo("#feed");
+        $("<p/>").html("<strong>Nodebot:</strong> " + data)
+            .css("opacity", 0)
+            .appendTo($feed)
+            .animate({ opacity : 1 });
+
+        $feed.animate({scrollTop : $feed.height() });
     });
 
     

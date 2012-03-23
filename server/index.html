@@ -7,38 +7,27 @@
 
 	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	  <link rel="stylesheet" href="/stylesheets/base.css" />
-    <style>
-        input[type="text"] {
-        display: block;
-        margin: 0 auto;
-        }
-
-        p {
-        margin: 1em 0;
-        }
-    </style>
+	  <link rel="stylesheet" href="/stylesheets/style.css" />
 	  <link rel="shortcut icon" href="/images/favicon.ico" />
-    
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     
 </head>
 
 <body>
-	  <div class="container">
+    <section>
+		    <header>
+            <h1 class="remove-bottom">Nodebot</h1>
+        </header>
 
-		    <div class="sixteen columns alpha omega">
-			      <h1 class="remove-bottom">Nodebot</h1>
-			      <h5>A nodejs robot</h5>
-            <hr/>
-            <form>
-                <input type="text" id="question" placeholder="Ask me something" />
-            </form>
-            <hr/.
-                 <div id="feed"></div>
-		    </div>
-        <script src="/javascripts/nodebot.js"></script>
-	  </div>
+        <div id="feed"></div>
+
+        <form>
+            <input type="text" id="question" placeholder="Ask me something" />
+        </form>
+
+    </section>
+    <script src="/javascripts/nodebot.js"></script>
 </body>
 </html>
